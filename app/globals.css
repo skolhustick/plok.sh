@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Theme Variables
+   ============================================================================ */
+
+/* GitHub Light */
+[data-theme="github-light"] {
+  --bg: #ffffff;
+  --fg: #24292f;
+  --muted: #57606a;
+  --border: #d0d7de;
+  --accent: #0969da;
+  --code-bg: #f6f8fa;
+  --code-fg: #24292f;
+  --link: #0969da;
+  --link-hover: #0550ae;
+}
+
+/* GitHub Dark (default) */
+[data-theme="github-dark"] {
+  --bg: #0d1117;
+  --fg: #c9d1d9;
+  --muted: #8b949e;
+  --border: #30363d;
+  --accent: #58a6ff;
+  --code-bg: #161b22;
+  --code-fg: #c9d1d9;
+  --link: #58a6ff;
+  --link-hover: #79c0ff;
+}
+
+/* One Dark */
+[data-theme="one-dark"] {
+  --bg: #282c34;
+  --fg: #abb2bf;
+  --muted: #5c6370;
+  --border: #3e4451;
+  --accent: #61afef;
+  --code-bg: #21252b;
+  --code-fg: #abb2bf;
+  --link: #61afef;
+  --link-hover: #8cc4f0;
+}
+
+/* Gruvbox Dark */
+[data-theme="gruvbox-dark"] {
+  --bg: #282828;
+  --fg: #ebdbb2;
+  --muted: #a89984;
+  --border: #3c3836;
+  --accent: #fabd2f;
+  --code-bg: #1d2021;
+  --code-fg: #ebdbb2;
+  --link: #83a598;
+  --link-hover: #8ec07c;
+}
+
+/* Gruvbox Light */
+[data-theme="gruvbox-light"] {
+  --bg: #fbf1c7;
+  --fg: #3c3836;
+  --muted: #7c6f64;
+  --border: #d5c4a1;
+  --accent: #d79921;
+  --code-bg: #f2e5bc;
+  --code-fg: #3c3836;
+  --link: #458588;
+  --link-hover: #076678;
+}
+
+/* Solarized Dark */
+[data-theme="solarized-dark"] {
+  --bg: #002b36;
+  --fg: #839496;
+  --muted: #586e75;
+  --border: #073642;
+  --accent: #b58900;
+  --code-bg: #073642;
+  --code-fg: #839496;
+  --link: #268bd2;
+  --link-hover: #2aa198;
+}
+
+/* Solarized Light */
+[data-theme="solarized-light"] {
+  --bg: #fdf6e3;
+  --fg: #657b83;
+  --muted: #93a1a1;
+  --border: #eee8d5;
+  --accent: #b58900;
+  --code-bg: #eee8d5;
+  --code-fg: #657b83;
+  --link: #268bd2;
+  --link-hover: #2aa198;
+}
+
+/* Nord */
+[data-theme="nord"] {
+  --bg: #2e3440;
+  --fg: #d8dee9;
+  --muted: #4c566a;
+  --border: #3b4252;
+  --accent: #88c0d0;
+  --code-bg: #3b4252;
+  --code-fg: #d8dee9;
+  --link: #81a1c1;
+  --link-hover: #88c0d0;
+}
+
+/* Dracula */
+[data-theme="dracula"] {
+  --bg: #282a36;
+  --fg: #f8f8f2;
+  --muted: #6272a4;
+  --border: #44475a;
+  --accent: #ff79c6;
+  --code-bg: #21222c;
+  --code-fg: #f8f8f2;
+  --link: #8be9fd;
+  --link-hover: #ff79c6;
+}
+
+/* Tokyo Night */
+[data-theme="tokyo-night"] {
+  --bg: #1a1b26;
+  --fg: #c0caf5;
+  --muted: #565f89;
+  --border: #292e42;
+  --accent: #7aa2f7;
+  --code-bg: #16161e;
+  --code-fg: #c0caf5;
+  --link: #7aa2f7;
+  --link-hover: #bb9af7;
+}
+
+/* Monokai */
+[data-theme="monokai"] {
+  --bg: #272822;
+  --fg: #f8f8f2;
+  --muted: #75715e;
+  --border: #3e3d32;
+  --accent: #f92672;
+  --code-bg: #1e1f1c;
+  --code-fg: #f8f8f2;
+  --link: #66d9ef;
+  --link-hover: #a6e22e;
+}
+
+/* ============================================================================
+   Font Variables
+   ============================================================================ */
+
+[data-font="system"] {
+  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-code: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+[data-font="inter"] {
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-code: ui-monospace, SFMono-Regular, monospace;
+}
+
+[data-font="jetbrains"] {
+  --font-body: var(--font-jetbrains), ui-monospace, monospace;
+  --font-code: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+/* ============================================================================
+   Base Styles
+   ============================================================================ */
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+}
+
+code, pre {
+  font-family: var(--font-code);
+}
+
+/* ============================================================================
+   Typography Plugin Overrides
+   ============================================================================ */
+
+.prose {
+  --tw-prose-body: var(--fg);
+  --tw-prose-headings: var(--fg);
+  --tw-prose-lead: var(--muted);
+  --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--fg);
+  --tw-prose-counters: var(--muted);
+  --tw-prose-bullets: var(--muted);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--fg);
+  --tw-prose-quote-borders: var(--accent);
+  --tw-prose-captions: var(--muted);
+  --tw-prose-code: var(--code-fg);
+  --tw-prose-pre-code: var(--code-fg);
+  --tw-prose-pre-bg: var(--code-bg);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+
+.prose a:hover {
+  color: var(--link-hover);
+}
+
+.prose code {
+  background: var(--code-bg);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+/* Shiki code block styling */
+.prose pre > code {
+  display: grid;
+}
+
+.prose pre code .line {
+  padding: 0 1rem;
+}
+
+/* ============================================================================
+   Utility Classes
+   ============================================================================ */
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
