@@ -1,6 +1,9 @@
 'use client';
 
 import { Shell } from '@/components/Shell';
+import { useEffect, useState } from 'react';
+
+const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
 
 export default function UserError({
   error,
@@ -9,14 +12,26 @@ export default function UserError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const [frame, setFrame] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFrame((f) => (f + 1) % frames.length);
+    }, 80);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <Shell>
+    <Shell theme="rose-pine" font="geist-mono">
       <div className="max-w-4xl mx-auto px-4 py-24 text-center">
-        <h1 className="text-2xl font-bold text-[var(--fg)] mb-4">
+        <div className="font-mono text-4xl text-[var(--accent)] mb-6">
+          {frames[frame]} error {frames[frame]}
+        </div>
+        <p className="text-xl text-[var(--muted)] mb-2">
           Something went wrong
-        </h1>
-        <p className="text-[var(--muted)] mb-8">
-          {error.message || 'Failed to load user repos'}
+        </p>
+        <p className="text-sm text-[var(--muted)] mb-8 font-mono">
+          {error.message || 'Failed to load'}
         </p>
         <button
           onClick={reset}

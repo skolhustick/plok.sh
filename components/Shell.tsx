@@ -55,20 +55,6 @@ export function Shell({ children, breadcrumbs, theme, font, customerGaId }: Shel
       </header>
 
       <main className="flex-1">{children}</main>
-
-      <footer className="border-t border-[var(--border)] bg-[var(--bg)]">
-        <div className="max-w-4xl mx-auto px-4 py-4 text-sm text-[var(--muted)]">
-          Powered by{' '}
-          <a
-            href="https://github.com"
-            className="text-[var(--link)] hover:text-[var(--link-hover)]"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }
