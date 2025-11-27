@@ -102,7 +102,7 @@ export default async function PostPage({ params }: Props) {
       breadcrumbs={[
         { label: user, href: `/${user}` },
         { label: repo, href: `/${user}/${repo}` },
-        { label: rendered.title },
+        { label: slug },
       ]}
       theme={config.theme}
       font={config.font}
@@ -114,6 +114,8 @@ export default async function PostPage({ params }: Props) {
           toc={rendered.toc}
           config={config}
           title={rendered.title}
+          date={rendered.date}
+          description={rendered.description}
         />
       </div>
     </Shell>

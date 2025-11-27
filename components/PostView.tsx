@@ -6,15 +6,45 @@ interface PostViewProps {
   toc: TocItem[];
   config: BlogConfig;
   title: string;
+  date?: string;
+  description?: string;
 }
 
-export function PostView({ html, toc, config, title }: PostViewProps) {
+function formatDate(dateStr: string): string {
+  try {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  } catch {
+    return dateStr;
+  }
+}
+
+export function PostView({ html, toc, config, title, date, description }: PostViewProps) {
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-16">
       {/* Main content */}
       <article className="flex-1 min-w-0">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold text-[var(--fg)]">{title}</h1>
+        <header className="mb-8 pb-8 border-b border-[var(--border)]">
+          <h1 className="text-3xl font-bold text-[var(--fg)] mb-4">{title}</h1>
+          {(date || description) && (
+            <div className="space-y-2">
+              {date && (
+                <p className="text-sm text-[var(--muted)]">
+                  {formatDate(date)}
+                </p>
+              )}
+              {description && (
+                <p className="text-lg text-[var(--muted)]">
+                  {description}
+                </p>
+              )}
+            </div>
+          )}
         </header>
 
         <div

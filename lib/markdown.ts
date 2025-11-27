@@ -38,6 +38,36 @@ async function getHighlighter(theme: string): Promise<Highlighter> {
 }
 
 /**
+ * Parse frontmatter from markdown content
+ */
+export function parseFrontmatter(text: string): {
+  content: string;
+  title?: string;
+  date?: string;
+  description?: string;
+} {
+  const frontmatterMatch = text.match(/^---\n([\s\S]*?)\n---\n?/);
+  
+  if (!frontmatterMatch) {
+    return { content: text };
+  }
+
+  const frontmatter = frontmatterMatch[1];
+  const content = text.slice(frontmatterMatch[0].length);
+
+  const titleMatch = frontmatter.match(/^title:\s*["']?(.+?)["']?$/m);
+  const dateMatch = frontmatter.match(/^date:\s*["']?(.+?)["']?$/m);
+  const descMatch = frontmatter.match(/^description:\s*["']?(.+?)["']?$/m);
+
+  return {
+    content,
+    title: titleMatch?.[1],
+    date: dateMatch?.[1],
+    description: descMatch?.[1],
+  };
+}
+
+/**
  * Render markdown to HTML with syntax highlighting and TOC extraction
  */
 export async function renderMarkdown(
@@ -45,6 +75,9 @@ export async function renderMarkdown(
   themeName: ThemeName,
   slug: string
 ): Promise<RenderedPost> {
+  // Strip frontmatter before rendering
+  const { content: markdownContent, title: frontmatterTitle, date, description } = parseFrontmatter(text);
+
   const shikiTheme = mapThemeToShikiTheme(themeName);
   const highlighter = await getHighlighter(shikiTheme);
 
@@ -108,10 +141,10 @@ export async function renderMarkdown(
     }
   };
 
-  const html = md.render(text);
+  const html = md.render(markdownContent);
 
-  // Determine title: first H1 or humanized slug
-  const title = firstH1 || humanizeSlug(slug);
+  // Determine title: frontmatter > first H1 > humanized slug
+  const title = frontmatterTitle || firstH1 || humanizeSlug(slug);
 
-  return { title, html, toc };
+  return { title, html, toc, date, description };
 }

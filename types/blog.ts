@@ -41,6 +41,8 @@ export interface RenderedPost {
   title: string;
   html: string;
   toc: TocItem[];
+  date?: string;
+  description?: string;
 }
 
 // ============================================================================

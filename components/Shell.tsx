@@ -33,19 +33,22 @@ export function Shell({ children, breadcrumbs, theme, font, customerGaId }: Shel
           </Link>
 
           {breadcrumbs && breadcrumbs.length > 0 && (
-            <nav className="flex items-center gap-2 text-sm text-[var(--muted)]">
+            <nav className="flex items-center gap-2 text-sm text-[var(--muted)] min-w-0 overflow-hidden">
               {breadcrumbs.map((crumb, index) => (
-                <span key={index} className="flex items-center gap-2">
-                  <span>/</span>
+                <span key={index} className="flex items-center gap-2 min-w-0">
+                  <span className="flex-shrink-0">/</span>
                   {crumb.href ? (
                     <Link
                       href={crumb.href}
-                      className="hover:text-[var(--link)] transition-colors"
+                      className="hover:text-[var(--link)] transition-colors truncate max-w-[120px] sm:max-w-[180px]"
+                      title={crumb.label}
                     >
                       {crumb.label}
                     </Link>
                   ) : (
-                    <span className="text-[var(--fg)]">{crumb.label}</span>
+                    <span className="text-[var(--fg)] truncate max-w-[120px] sm:max-w-[180px]" title={crumb.label}>
+                      {crumb.label}
+                    </span>
                   )}
                 </span>
               ))}
