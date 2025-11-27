@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="github-dark" data-font="system">
+    <html lang="en" data-theme="rose-pine" data-font="geist-mono">
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} antialiased`}
       >
