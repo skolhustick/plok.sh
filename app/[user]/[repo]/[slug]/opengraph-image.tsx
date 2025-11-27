@@ -1,7 +1,4 @@
 import { ImageResponse } from 'next/og';
-import { getPostContent } from '@/lib/github';
-import { getRepoConfig } from '@/lib/config';
-import { parseFrontmatter } from '@/lib/markdown';
 
 export const runtime = 'edge';
 export const alt = 'Blog post';
@@ -26,6 +23,17 @@ const THEME_COLORS: Record<string, { bg: string; fg: string; accent: string; mut
   'rose-pine-dawn': { bg: '#faf4ed', fg: '#575279', accent: '#907aa9', muted: '#9893a5' },
 };
 
+// Simple frontmatter parser for edge
+function parseFrontmatter(content: string) {
+  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  const fm = match[1];
+  const title = fm.match(/^title:\s*["']?(.+?)["']?$/m)?.[1];
+  const date = fm.match(/^date:\s*["']?(.+?)["']?$/m)?.[1];
+  const description = fm.match(/^description:\s*["']?(.+?)["']?$/m)?.[1];
+  return { title, date, description };
+}
+
 export default async function Image({
   params,
 }: {
@@ -33,29 +41,41 @@ export default async function Image({
 }) {
   const { user, repo, slug } = await params;
 
-  // Fetch config and content
-  const [configResult, contentResult] = await Promise.all([
-    getRepoConfig(user, repo),
-    getPostContent(user, repo, slug),
-  ]);
-
-  const config = configResult.ok ? configResult.value : null;
-  const theme = config?.theme || 'rose-pine';
-  const colors = THEME_COLORS[theme] || THEME_COLORS['rose-pine'];
-
-  // Extract title from frontmatter or content
+  let theme = 'rose-pine';
+  let blogTitle = repo;
   let title = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
   let description = '';
   let date = '';
 
-  if (contentResult.ok) {
-    const parsed = parseFrontmatter(contentResult.value);
-    if (parsed.title) title = parsed.title;
-    if (parsed.description) description = parsed.description;
-    if (parsed.date) date = parsed.date;
+  try {
+    // Fetch config (lightweight)
+    const configRes = await fetch(
+      `https://raw.githubusercontent.com/${user}/${repo}/main/blog/blog.config.yaml`
+    );
+    if (configRes.ok) {
+      const yaml = await configRes.text();
+      const themeMatch = yaml.match(/^theme:\s*["']?(.+?)["']?$/m);
+      const titleMatch = yaml.match(/^title:\s*["']?(.+?)["']?$/m);
+      if (themeMatch) theme = themeMatch[1];
+      if (titleMatch) blogTitle = titleMatch[1];
+    }
+
+    // Fetch post content
+    const postRes = await fetch(
+      `https://raw.githubusercontent.com/${user}/${repo}/main/blog/${slug}.md`
+    );
+    if (postRes.ok) {
+      const content = await postRes.text();
+      const parsed = parseFrontmatter(content);
+      if (parsed.title) title = parsed.title;
+      if (parsed.description) description = parsed.description;
+      if (parsed.date) date = parsed.date;
+    }
+  } catch {
+    // Use defaults on error
   }
 
-  const blogTitle = config?.title || repo;
+  const colors = THEME_COLORS[theme] || THEME_COLORS['rose-pine'];
 
   return new ImageResponse(
     (

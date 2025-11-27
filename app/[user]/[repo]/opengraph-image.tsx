@@ -1,5 +1,4 @@
 import { ImageResponse } from 'next/og';
-import { getRepoConfig } from '@/lib/config';
 
 export const runtime = 'edge';
 export const alt = 'Blog';
@@ -30,14 +29,28 @@ export default async function Image({
 }) {
   const { user, repo } = await params;
 
-  const configResult = await getRepoConfig(user, repo);
-  const config = configResult.ok ? configResult.value : null;
-  
-  const theme = config?.theme || 'rose-pine';
+  let theme = 'rose-pine';
+  let title = repo;
+  let description = `Blog posts from ${user}/${repo}`;
+
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/${user}/${repo}/main/blog/blog.config.yaml`
+    );
+    if (res.ok) {
+      const yaml = await res.text();
+      const themeMatch = yaml.match(/^theme:\s*["']?(.+?)["']?$/m);
+      const titleMatch = yaml.match(/^title:\s*["']?(.+?)["']?$/m);
+      const descMatch = yaml.match(/^description:\s*["']?(.+?)["']?$/m);
+      if (themeMatch) theme = themeMatch[1];
+      if (titleMatch) title = titleMatch[1];
+      if (descMatch) description = descMatch[1];
+    }
+  } catch {
+    // Use defaults
+  }
+
   const colors = THEME_COLORS[theme] || THEME_COLORS['rose-pine'];
-  
-  const title = config?.title || repo;
-  const description = config?.description || `Blog posts from ${user}/${repo}`;
 
   return new ImageResponse(
     (
