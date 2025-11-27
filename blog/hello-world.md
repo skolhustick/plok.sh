@@ -1,4 +1,4 @@
-# Hello, World!
+# plok.sh
 
 Welcome to **plok.sh** — the simplest way to turn your GitHub repo into a blog.
 

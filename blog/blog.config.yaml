@@ -1,0 +1,7 @@
+title: "plok.sh blog"
+description: "It's plokking great!"
+theme: "gruvbox-dark"
+font: "geist-mono"
+accent: "#fabd2f"
+show_toc: true
+show_repo_link: true
