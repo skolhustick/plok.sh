@@ -8,18 +8,25 @@ interface BreadcrumbItem {
 interface ShellProps {
   children: React.ReactNode;
   breadcrumbs?: BreadcrumbItem[];
+  theme?: string;
+  font?: string;
 }
 
-export function Shell({ children, breadcrumbs }: ShellProps) {
+export function Shell({ children, breadcrumbs, theme, font }: ShellProps) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div 
+      className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--fg)]"
+      style={{ fontFamily: 'var(--font-body)' }}
+      data-theme={theme}
+      data-font={font}
+    >
       <header className="border-b border-[var(--border)] bg-[var(--bg)]">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
           <Link
             href="/"
             className="font-bold text-lg text-[var(--fg)] hover:text-[var(--accent)] transition-colors"
           >
-            RepoBlog
+            plok.sh
           </Link>
 
           {breadcrumbs && breadcrumbs.length > 0 && (

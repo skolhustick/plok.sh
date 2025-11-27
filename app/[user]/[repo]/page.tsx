@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props) {
   const config = configResult.ok ? configResult.value : null;
 
   return {
-    title: config?.title || `${repo} - RepoBlog`,
+    title: config?.title || `${repo} - plok.sh`,
     description: config?.description || `Blog posts from ${user}/${repo}`,
   };
 }
@@ -39,6 +39,8 @@ export default async function RepoPage({ params }: Props) {
             { label: user, href: `/${user}` },
             { label: repo },
           ]}
+          theme={config?.theme}
+          font={config?.font}
         >
           <div className="max-w-4xl mx-auto px-4 py-12">
             <div className="text-center py-12">
@@ -59,6 +61,8 @@ export default async function RepoPage({ params }: Props) {
           { label: user, href: `/${user}` },
           { label: repo },
         ]}
+        theme={config?.theme}
+        font={config?.font}
       >
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center py-12">
@@ -76,6 +80,8 @@ export default async function RepoPage({ params }: Props) {
         { label: user, href: `/${user}` },
         { label: repo },
       ]}
+      theme={config?.theme}
+      font={config?.font}
     >
       <div className="max-w-4xl mx-auto px-4 py-12">
         <header className="mb-8">

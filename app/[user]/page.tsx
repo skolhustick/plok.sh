@@ -1,7 +1,9 @@
 import { Shell } from '@/components/Shell';
 import { RepoList } from '@/components/RepoList';
 import { getUserBlogRepos, hasGitHubToken } from '@/lib/github';
+import { getRepoConfig } from '@/lib/config';
 import { notFound } from 'next/navigation';
+import type { RepoSummary } from '@/types/blog';
 
 interface Props {
   params: Promise<{ user: string }>;
@@ -12,7 +14,7 @@ export const revalidate = 3600; // 1 hour
 export async function generateMetadata({ params }: Props) {
   const { user } = await params;
   return {
-    title: `${user}'s Blogs - RepoBlog`,
+    title: `${user}'s Blogs - plok.sh`,
     description: `Browse ${user}'s repos with blogs`,
   };
 }
@@ -65,13 +67,28 @@ export default async function UserPage({ params }: Props) {
     );
   }
 
+  // Fetch blog configs for each repo to get titles/descriptions
+  const reposWithConfigs: RepoSummary[] = await Promise.all(
+    result.value.map(async (repo) => {
+      const configResult = await getRepoConfig(user, repo.name);
+      if (configResult.ok) {
+        return {
+          ...repo,
+          blogTitle: configResult.value.title,
+          blogDescription: configResult.value.description,
+        };
+      }
+      return repo;
+    })
+  );
+
   return (
     <Shell breadcrumbs={[{ label: user }]}>
       <div className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold text-[var(--fg)] mb-8">
           {user}&apos;s Blogs
         </h1>
-        <RepoList repos={result.value} user={user} />
+        <RepoList repos={reposWithConfigs} user={user} />
       </div>
     </Shell>
   );

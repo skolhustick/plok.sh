@@ -16,7 +16,7 @@ export const revalidate = 300; // 5 minutes
 export async function generateMetadata({ params }: Props) {
   const { user, repo, slug } = await params;
   return {
-    title: `${slug} - ${repo} - RepoBlog`,
+    title: `${slug} - ${repo} - plok.sh`,
   };
 }
 
@@ -43,6 +43,8 @@ export default async function PostPage({ params }: Props) {
           { label: repo, href: `/${user}/${repo}` },
           { label: slug },
         ]}
+        theme={config.theme}
+        font={config.font}
       >
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="p-4 bg-red-500/10 border border-red-500/20 rounded mb-8">
@@ -76,6 +78,8 @@ export default async function PostPage({ params }: Props) {
           { label: repo, href: `/${user}/${repo}` },
           { label: slug },
         ]}
+        theme={config.theme}
+        font={config.font}
       >
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded mb-8">
@@ -99,6 +103,8 @@ export default async function PostPage({ params }: Props) {
         { label: repo, href: `/${user}/${repo}` },
         { label: rendered.title },
       ]}
+      theme={config.theme}
+      font={config.font}
     >
       <div className="max-w-4xl mx-auto px-4 py-12">
         <PostView

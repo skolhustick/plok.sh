@@ -10,11 +10,14 @@ export const THEME_LIST = [
   'dracula',
   'tokyo-night',
   'monokai',
+  'rose-pine',
+  'rose-pine-moon',
+  'rose-pine-dawn',
 ] as const;
 
 export type ThemeName = (typeof THEME_LIST)[number];
 
-export const FONT_LIST = ['system', 'inter', 'jetbrains'] as const;
+export const FONT_LIST = ['system', 'inter', 'jetbrains', 'geist-mono'] as const;
 
 export type FontName = (typeof FONT_LIST)[number];
 
@@ -57,6 +60,9 @@ export function mapThemeToShikiTheme(themeName: ThemeName): string {
     dracula: 'dracula',
     'tokyo-night': 'tokyo-night',
     monokai: 'monokai',
+    'rose-pine': 'rose-pine',
+    'rose-pine-moon': 'rose-pine-moon',
+    'rose-pine-dawn': 'rose-pine-dawn',
   };
   return mapping[themeName] || 'github-dark';
 }

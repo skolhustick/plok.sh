@@ -1,5 +1,5 @@
 // ============================================================================
-// Core Types for RepoBlog
+// Core Types for plok.sh
 // ============================================================================
 
 export interface BlogConfig {
@@ -16,6 +16,8 @@ export interface RepoSummary {
   name: string;
   description: string | null;
   url: string;
+  blogTitle?: string;
+  blogDescription?: string;
 }
 
 export interface PostSummary {

@@ -70,7 +70,7 @@ export async function getRepoConfig(
   user: string,
   repo: string
 ): Promise<Result<BlogConfig>> {
-  const contentsUrl = `https://api.github.com/repos/${user}/${repo}/contents/blog.config.yaml`;
+  const contentsUrl = `https://api.github.com/repos/${user}/${repo}/contents/blog/blog.config.yaml`;
 
   const contentsResult = await githubFetch<{ download_url: string }>(contentsUrl, {
     revalidate: 300,

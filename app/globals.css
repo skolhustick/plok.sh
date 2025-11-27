@@ -148,6 +148,45 @@
   --link-hover: #a6e22e;
 }
 
+/* Rosé Pine */
+[data-theme="rose-pine"] {
+  --bg: #191724;
+  --fg: #e0def4;
+  --muted: #6e6a86;
+  --border: #26233a;
+  --accent: #c4a7e7;
+  --code-bg: #1f1d2e;
+  --code-fg: #e0def4;
+  --link: #9ccfd8;
+  --link-hover: #ebbcba;
+}
+
+/* Rosé Pine Moon */
+[data-theme="rose-pine-moon"] {
+  --bg: #232136;
+  --fg: #e0def4;
+  --muted: #6e6a86;
+  --border: #2a273f;
+  --accent: #c4a7e7;
+  --code-bg: #2a283e;
+  --code-fg: #e0def4;
+  --link: #9ccfd8;
+  --link-hover: #ea9a97;
+}
+
+/* Rosé Pine Dawn */
+[data-theme="rose-pine-dawn"] {
+  --bg: #faf4ed;
+  --fg: #575279;
+  --muted: #9893a5;
+  --border: #f2e9e1;
+  --accent: #907aa9;
+  --code-bg: #f4ede8;
+  --code-fg: #575279;
+  --link: #56949f;
+  --link-hover: #d7827e;
+}
+
 /* ============================================================================
    Font Variables
    ============================================================================ */
@@ -165,6 +204,11 @@
 [data-font="jetbrains"] {
   --font-body: var(--font-jetbrains), ui-monospace, monospace;
   --font-code: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+[data-font="geist-mono"] {
+  --font-body: var(--font-geist-mono), ui-monospace, monospace;
+  --font-code: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 /* ============================================================================

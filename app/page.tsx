@@ -22,7 +22,7 @@ export default function Home() {
         {/* Hero */}
         <section className="text-center mb-16">
           <h1 className="text-4xl font-bold text-[var(--fg)] mb-4">
-            RepoBlog
+            plok.sh
           </h1>
           <p className="text-xl text-[var(--muted)] max-w-2xl mx-auto">
             Turn any GitHub repo&apos;s <code className="bg-[var(--code-bg)] px-2 py-1 rounded">/blog</code> folder
@@ -41,7 +41,7 @@ export default function Home() {
               2. Add markdown files (<code className="bg-[var(--code-bg)] px-1 rounded">.md</code>)
             </p>
             <p>
-              3. Visit <code className="bg-[var(--code-bg)] px-1 rounded">repoblog.dev/[user]/[repo]</code>
+              3. Visit <code className="bg-[var(--code-bg)] px-1 rounded">plok.sh/[user]/[repo]</code>
             </p>
           </div>
         </section>
