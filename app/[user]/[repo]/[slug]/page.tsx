@@ -80,6 +80,7 @@ export default async function PostPage({ params }: Props) {
         ]}
         theme={config.theme}
         font={config.font}
+        customerGaId={config.ga_id ?? undefined}
       >
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded mb-8">
@@ -105,6 +106,7 @@ export default async function PostPage({ params }: Props) {
       ]}
       theme={config.theme}
       font={config.font}
+      customerGaId={config.ga_id ?? undefined}
     >
       <div className="max-w-4xl mx-auto px-4 py-12">
         <PostView

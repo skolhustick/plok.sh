@@ -41,6 +41,7 @@ export default async function RepoPage({ params }: Props) {
           ]}
           theme={config?.theme}
           font={config?.font}
+          customerGaId={config?.ga_id ?? undefined}
         >
           <div className="max-w-4xl mx-auto px-4 py-12">
             <div className="text-center py-12">
@@ -63,6 +64,7 @@ export default async function RepoPage({ params }: Props) {
         ]}
         theme={config?.theme}
         font={config?.font}
+        customerGaId={config?.ga_id ?? undefined}
       >
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center py-12">
@@ -82,6 +84,7 @@ export default async function RepoPage({ params }: Props) {
       ]}
       theme={config?.theme}
       font={config?.font}
+      customerGaId={config?.ga_id ?? undefined}
     >
       <div className="max-w-4xl mx-auto px-4 py-12">
         <header className="mb-8">

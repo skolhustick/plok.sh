@@ -12,7 +12,15 @@ export const DEFAULT_CONFIG: BlogConfig = {
   accent: null,
   show_toc: true,
   show_repo_link: true,
+  ga_id: null,
 };
+
+/**
+ * Validate GA ID format (G-XXXXXXXXXX or UA-XXXXXXXX-X)
+ */
+function isValidGaId(id: string): boolean {
+  return /^(G-[A-Z0-9]+|UA-\d+-\d+)$/i.test(id);
+}
 
 /**
  * Validate hex color format (#RGB or #RRGGBB)
@@ -60,6 +68,10 @@ export function validateConfig(partial: Partial<BlogConfig>): BlogConfig {
       typeof partial.show_repo_link === 'boolean'
         ? partial.show_repo_link
         : DEFAULT_CONFIG.show_repo_link,
+    ga_id:
+      typeof partial.ga_id === 'string' && isValidGaId(partial.ga_id)
+        ? partial.ga_id
+        : DEFAULT_CONFIG.ga_id,
   };
 }
 

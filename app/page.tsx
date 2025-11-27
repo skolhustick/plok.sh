@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 
 const examples = [
   { github: 'github.com/you/repo/blog/post.md', plok: 'plok.sh/you/repo/post' },
@@ -46,6 +47,7 @@ export default function Home() {
       data-theme="rose-pine"
       data-font="geist-mono"
     >
+      <GoogleAnalytics />
       {/* Header */}
       <header className="px-6 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">

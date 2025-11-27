@@ -10,6 +10,7 @@ export interface BlogConfig {
   accent: string | null;
   show_toc: boolean;
   show_repo_link: boolean;
+  ga_id: string | null;
 }
 
 export interface RepoSummary {

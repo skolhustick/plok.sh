@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ConfigBuilder, type ConfigState } from '@/components/ConfigBuilder';
+import { GoogleAnalytics } from '@/components/GoogleAnalytics';
 import { Toc } from '@/components/Toc';
 import type { TocItem } from '@/types/blog';
 
@@ -39,6 +40,7 @@ export function ThemePreviewClient({
       data-theme={config.theme}
       data-font={config.font}
     >
+      <GoogleAnalytics />
       {/* Header */}
       <header className="border-b border-[var(--border)] bg-[var(--bg)]">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-4">
