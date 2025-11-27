@@ -147,17 +147,16 @@ export async function getBlogPosts(
       const slug = file.name.replace(/\.md$/, '');
       
       // Try to fetch the file content to extract title and metadata
-      try {
-        const contentResult = await githubFetch<{ download_url: string }>(file.url, { revalidate: 300 });
-        if (contentResult.ok && contentResult.value.download_url) {
-          const response = await fetch(contentResult.value.download_url, { next: { revalidate: 300 } });
+      if (file.download_url) {
+        try {
+          const response = await fetch(file.download_url, { next: { revalidate: 300 } });
           if (response.ok) {
             const content = await response.text();
             return extractPostMetadata(slug, content);
           }
+        } catch {
+          // Fall back to slug-based title
         }
-      } catch {
-        // Fall back to slug-based title
       }
       
       return {

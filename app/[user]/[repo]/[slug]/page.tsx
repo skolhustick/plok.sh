@@ -116,6 +116,9 @@ export default async function PostPage({ params }: Props) {
           title={rendered.title}
           date={rendered.date}
           description={rendered.description}
+          user={user}
+          repo={repo}
+          slug={slug}
         />
       </div>
     </Shell>
