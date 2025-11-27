@@ -138,18 +138,78 @@ export async function getBlogPosts(
     return result;
   }
 
-  const posts = result.value
-    .filter((file) => file.type === 'file' && file.name.endsWith('.md'))
-    .map((file) => {
+  const mdFiles = result.value
+    .filter((file) => file.type === 'file' && file.name.endsWith('.md') && file.name !== 'blog.config.yaml');
+
+  // Fetch content for each post to extract metadata
+  const posts = await Promise.all(
+    mdFiles.map(async (file) => {
       const slug = file.name.replace(/\.md$/, '');
+      
+      // Try to fetch the file content to extract title and metadata
+      try {
+        const contentResult = await githubFetch<{ download_url: string }>(file.url, { revalidate: 300 });
+        if (contentResult.ok && contentResult.value.download_url) {
+          const response = await fetch(contentResult.value.download_url, { next: { revalidate: 300 } });
+          if (response.ok) {
+            const content = await response.text();
+            return extractPostMetadata(slug, content);
+          }
+        }
+      } catch {
+        // Fall back to slug-based title
+      }
+      
       return {
         slug,
         title: humanizeSlug(slug),
       };
     })
-    .sort((a, b) => a.slug.localeCompare(b.slug));
+  );
+
+  // Sort by date (newest first) or alphabetically if no date
+  posts.sort((a, b) => {
+    if (a.date && b.date) {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    }
+    if (a.date) return -1;
+    if (b.date) return 1;
+    return a.slug.localeCompare(b.slug);
+  });
 
   return ok(posts);
+}
+
+/**
+ * Extract title, date, and description from post content
+ */
+function extractPostMetadata(slug: string, content: string): PostSummary {
+  let title = humanizeSlug(slug);
+  let date: string | undefined;
+  let description: string | undefined;
+
+  // Check for YAML frontmatter
+  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (frontmatterMatch) {
+    const frontmatter = frontmatterMatch[1];
+    
+    const titleMatch = frontmatter.match(/^title:\s*["']?(.+?)["']?$/m);
+    if (titleMatch) title = titleMatch[1];
+    
+    const dateMatch = frontmatter.match(/^date:\s*["']?(.+?)["']?$/m);
+    if (dateMatch) date = dateMatch[1];
+    
+    const descMatch = frontmatter.match(/^description:\s*["']?(.+?)["']?$/m);
+    if (descMatch) description = descMatch[1];
+  }
+
+  // If no title from frontmatter, try first H1
+  if (title === humanizeSlug(slug)) {
+    const h1Match = content.match(/^#\s+(.+)$/m);
+    if (h1Match) title = h1Match[1];
+  }
+
+  return { slug, title, date, description };
 }
 
 /**

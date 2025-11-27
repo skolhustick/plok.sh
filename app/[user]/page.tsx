@@ -78,7 +78,7 @@ export default async function UserPage({ params }: Props) {
     );
   }
 
-  // Fetch blog configs for each repo to get titles/descriptions
+  // Fetch blog configs for each repo to get titles/descriptions/themes
   const reposWithConfigs: RepoSummary[] = await Promise.all(
     result.value.map(async (repo) => {
       const configResult = await getRepoConfig(user, repo.name);
@@ -87,6 +87,8 @@ export default async function UserPage({ params }: Props) {
           ...repo,
           blogTitle: configResult.value.title,
           blogDescription: configResult.value.description,
+          blogTheme: configResult.value.theme,
+          blogFont: configResult.value.font,
         };
       }
       return repo;

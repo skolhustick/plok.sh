@@ -19,11 +19,16 @@ export interface RepoSummary {
   url: string;
   blogTitle?: string;
   blogDescription?: string;
+  blogTheme?: string;
+  blogFont?: string;
+  postCount?: number;
 }
 
 export interface PostSummary {
   slug: string;
   title: string;
+  date?: string;
+  description?: string;
 }
 
 export interface TocItem {

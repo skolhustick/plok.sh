@@ -1,3 +1,9 @@
+---
+title: It's plokkin alive!
+date: 2025-11-28
+description: From github to blog instantly...
+---
+
 # plok.sh
 
 Welcome to **plok.sh** — the simplest way to turn your GitHub repo into a blog.
