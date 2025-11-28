@@ -105,38 +105,52 @@ export default function Home() {
           <div className="px-6">
             <form
               onSubmit={handleSubmit}
-              className="flex gap-2 max-w-xs mx-auto"
+              className="max-w-xs mx-auto"
             >
-              <div className="flex-1 flex items-center bg-[var(--code-bg)] rounded-lg border border-[var(--border)] px-3">
+              <div className="flex items-center bg-[var(--code-bg)] rounded-full border border-[var(--border)] pl-4 pr-1.5 py-1.5">
                 <span className="text-[var(--muted)] text-sm shrink-0">plok.sh/</span>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="user"
-                  className="w-full min-w-0 py-3 bg-transparent text-[var(--fg)] focus:outline-none"
-              />
-            </div>
-            <button
-              type="submit"
-              className="px-4 py-3 bg-[var(--accent)] text-[var(--bg)] rounded-lg font-medium hover:opacity-90 transition-opacity shrink-0"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </button>
+                  className="flex-1 min-w-0 py-1.5 bg-transparent text-[var(--fg)] focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  className="w-10 h-10 flex items-center justify-center bg-[var(--accent)] text-[var(--bg)] rounded-full hover:opacity-90 transition-opacity shrink-0"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
           </form>
           </div>
 
-          <p className="mt-6 text-xs sm:text-sm text-[var(--muted)] px-4">
-            <Link href="/themes" className="hover:text-[var(--accent)] transition-colors">21 themes</Link>
-            {' • '}
-            <span>Syntax highlighting</span>
-            {' • '}
-            <span>GA support</span>
-            {' • '}
-            <span>Zero config</span>
-          </p>
+          <div className="mt-6 text-xs sm:text-sm text-[var(--muted)] px-4 text-center">
+            <div className="sm:hidden">
+              <div>
+                <Link href="/themes" className="hover:text-[var(--accent)] transition-colors">21 themes</Link>
+                {' • '}
+                <span>Syntax highlighting</span>
+              </div>
+              <div>
+                <span>GA support</span>
+                {' • '}
+                <span>Zero config</span>
+              </div>
+            </div>
+            <div className="hidden sm:block">
+              <Link href="/themes" className="hover:text-[var(--accent)] transition-colors">21 themes</Link>
+              {' • '}
+              <span>Syntax highlighting</span>
+              {' • '}
+              <span>GA support</span>
+              {' • '}
+              <span>Zero config</span>
+            </div>
+          </div>
         </div>
       </main>
 
