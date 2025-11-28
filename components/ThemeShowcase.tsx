@@ -158,20 +158,81 @@ export function ThemeShowcase() {
             </div>
           </div>
 
-          {/* Right: Config Preview */}
-          <div className="bg-[var(--code-bg)] rounded-lg border border-[var(--border)] p-4">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-semibold text-[var(--fg)]">blog.config.yaml</h2>
-              <button
-                onClick={copyConfig}
-                className="px-3 py-1.5 text-xs bg-[var(--accent)] text-[var(--bg)] rounded hover:opacity-90 transition-opacity"
-              >
-                {copied ? 'Copied!' : 'Copy'}
-              </button>
+          {/* Right: Config Preview + Live Preview */}
+          <div className="flex flex-col gap-4">
+            <div className="bg-[var(--code-bg)] rounded-lg border border-[var(--border)] p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-semibold text-[var(--fg)]">blog.config.yaml</h2>
+                <button
+                  onClick={copyConfig}
+                  className="px-3 py-1.5 text-xs bg-[var(--accent)] text-[var(--bg)] rounded hover:opacity-90 transition-opacity"
+                >
+                  {copied ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
+              <pre className="text-sm font-mono text-[var(--fg)] whitespace-pre-wrap">
+                {generateYaml()}
+              </pre>
             </div>
-            <pre className="text-sm font-mono text-[var(--fg)] whitespace-pre-wrap">
-              {generateYaml()}
-            </pre>
+
+            {/* Live Preview in right column */}
+            <div className="flex-1 flex flex-col bg-[var(--code-bg)] rounded-lg border border-[var(--border)] p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-sm font-semibold text-[var(--fg)]">Preview</h2>
+                <div className="flex gap-1">
+                  <button
+                    onClick={() => setViewMode('desktop')}
+                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                      viewMode === 'desktop'
+                        ? 'bg-[var(--accent)] text-[var(--bg)]'
+                        : 'text-[var(--muted)] hover:text-[var(--fg)]'
+                    }`}
+                  >
+                    Desktop
+                  </button>
+                  <button
+                    onClick={() => setViewMode('mobile')}
+                    className={`px-2 py-1 text-xs rounded transition-colors ${
+                      viewMode === 'mobile'
+                        ? 'bg-[var(--accent)] text-[var(--bg)]'
+                        : 'text-[var(--muted)] hover:text-[var(--fg)]'
+                    }`}
+                  >
+                    Mobile
+                  </button>
+                </div>
+              </div>
+              <div className={`flex-1 flex transition-all ${viewMode === 'mobile' ? 'max-w-[280px] mx-auto' : ''}`}>
+                <div className="flex-1 bg-[var(--bg)] rounded border border-[var(--border)] p-4 overflow-auto">
+                  <h3 className="text-lg font-bold text-[var(--fg)] mb-1">{title || 'My Blog'}</h3>
+                  {description && <p className="text-xs text-[var(--muted)] mb-4">{description}</p>}
+                  <div className="space-y-3 text-[var(--fg)]">
+                    <h4 className="text-sm font-semibold">Getting Started ✨</h4>
+                    <p className="text-xs leading-relaxed">
+                      This is how your blog looks with <strong>bold</strong>, <em>italic</em>, and <code className="px-1 py-0.5 bg-[var(--code-bg)] rounded text-[10px]">inline code</code>.
+                    </p>
+                    
+                    <blockquote className="border-l-2 border-[var(--accent)] pl-3 text-xs text-[var(--muted)] italic">
+                      "The best blog is the one you actually write."
+                    </blockquote>
+
+                    <pre className="bg-[var(--code-bg)] rounded p-2 text-[10px] overflow-x-auto">
+                      <code>
+                        <span className="text-[var(--accent)]">const</span> blog = <span className="text-[var(--muted)]">'plok.sh'</span>;{'\n'}
+                        console.log(<span className="text-[var(--muted)]">`Hello, </span><span className="text-[var(--accent)]">${'{'}blog{'}'}</span><span className="text-[var(--muted)]">!`</span>);
+                      </code>
+                    </pre>
+
+                    <h5 className="text-xs font-semibold">Features</h5>
+                    <ul className="text-xs space-y-0.5 list-disc list-inside">
+                      <li>Markdown support</li>
+                      <li>Syntax highlighting</li>
+                      <li><a href="#" className="text-[var(--accent)] hover:underline">Links work too</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -251,57 +312,34 @@ export function ThemeShowcase() {
           </div>
         </div>
 
-        {/* Preview */}
-        <div className="border-t border-[var(--border)] pt-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-[var(--fg)]">Preview</h2>
-            <div className="hidden lg:flex gap-2">
-              <button
-                onClick={() => setViewMode('desktop')}
-                className={`px-3 py-1.5 text-xs rounded transition-colors ${
-                  viewMode === 'desktop'
-                    ? 'bg-[var(--accent)] text-[var(--bg)]'
-                    : 'bg-[var(--code-bg)] text-[var(--muted)] hover:text-[var(--fg)]'
-                }`}
-              >
-                Desktop
-              </button>
-              <button
-                onClick={() => setViewMode('mobile')}
-                className={`px-3 py-1.5 text-xs rounded transition-colors ${
-                  viewMode === 'mobile'
-                    ? 'bg-[var(--accent)] text-[var(--bg)]'
-                    : 'bg-[var(--code-bg)] text-[var(--muted)] hover:text-[var(--fg)]'
-                }`}
-              >
-                Mobile
-              </button>
-            </div>
-          </div>
+        {/* Mobile Preview */}
+        <div className="lg:hidden border-t border-[var(--border)] pt-6">
+          <h2 className="text-sm font-semibold text-[var(--fg)] mb-3">Preview</h2>
+          <div className="bg-[var(--code-bg)] rounded-lg border border-[var(--border)] p-4">
+            <h3 className="text-lg font-bold text-[var(--fg)] mb-1">{title || 'My Blog'}</h3>
+            {description && <p className="text-xs text-[var(--muted)] mb-4">{description}</p>}
+            <div className="space-y-3 text-[var(--fg)]">
+              <h4 className="text-sm font-semibold">Getting Started ✨</h4>
+              <p className="text-xs leading-relaxed">
+                This is how your blog looks with <strong>bold</strong>, <em>italic</em>, and <code className="px-1 py-0.5 bg-[var(--bg)] rounded text-[10px]">inline code</code>.
+              </p>
+              
+              <blockquote className="border-l-2 border-[var(--accent)] pl-3 text-xs text-[var(--muted)] italic">
+                "The best blog is the one you actually write."
+              </blockquote>
 
-          <div className={`mx-auto transition-all ${viewMode === 'mobile' ? 'max-w-sm' : 'max-w-3xl'}`}>
-            <div className="bg-[var(--code-bg)] rounded-lg border border-[var(--border)] p-6">
-              <div className="prose prose-sm max-w-none">
-                <h1 className="text-2xl font-bold text-[var(--fg)] mb-2">{title || 'My Blog'}</h1>
-                {description && <p className="text-sm text-[var(--muted)] mb-6">{description}</p>}
-                
-                <div className="space-y-4 text-[var(--fg)]">
-                  <h2 className="text-xl font-semibold">Hello, beautiful ✨</h2>
-                  <p className="text-sm">This is how your blog will look.</p>
-                  <p className="text-sm">
-                    Here's <strong>bold</strong>, <em>italic</em>, and <code className="px-1.5 py-0.5 bg-[var(--bg)] rounded text-xs">code</code>.
-                  </p>
-                  
-                  <h3 className="text-lg font-semibold">Lists work</h3>
-                  <ul className="text-sm space-y-1 list-disc list-inside">
-                    <li>Markdown ✅</li>
-                    <li>Syntax highlighting ✅</li>
-                    <li>21 themes ✅</li>
-                  </ul>
-                  
-                  <p className="text-sm">That's it!</p>
-                </div>
-              </div>
+              <pre className="bg-[var(--bg)] rounded p-2 text-[10px] overflow-x-auto">
+                <code>
+                  <span className="text-[var(--accent)]">const</span> blog = <span className="text-[var(--muted)]">'plok.sh'</span>;
+                </code>
+              </pre>
+
+              <h5 className="text-xs font-semibold">Features</h5>
+              <ul className="text-xs space-y-0.5 list-disc list-inside">
+                <li>Markdown support</li>
+                <li>Syntax highlighting</li>
+                <li><a href="#" className="text-[var(--accent)] hover:underline">Links work too</a></li>
+              </ul>
             </div>
           </div>
         </div>
