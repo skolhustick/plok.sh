@@ -124,47 +124,57 @@ interface GitHubFile {
 // ============================================================================
 
 /**
- * List blog posts from /blog directory
+ * List blog posts from /blog directory (recursively including subfolders)
  */
 export async function getBlogPosts(
   user: string,
   repo: string
 ): Promise<Result<PostSummary[]>> {
-  const url = `https://api.github.com/repos/${user}/${repo}/contents/blog`;
-
-  const result = await githubFetch<GitHubFile[]>(url, { revalidate: 300 });
-
-  if (!result.ok) {
-    return result;
-  }
-
-  const mdFiles = result.value
-    .filter((file) => file.type === 'file' && file.name.endsWith('.md') && file.name !== 'blog.config.yaml');
-
-  // Fetch content for each post to extract metadata
-  const posts = await Promise.all(
-    mdFiles.map(async (file) => {
-      const slug = file.name.replace(/\.md$/, '');
+  const posts: PostSummary[] = [];
+  
+  // Recursive function to scan directories
+  async function scanDirectory(path: string, prefix: string = ''): Promise<void> {
+    const url = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
+    const result = await githubFetch<GitHubFile[]>(url, { revalidate: 300 });
+    
+    if (!result.ok) {
+      return;
+    }
+    
+    for (const file of result.value) {
+      // Skip config file
+      if (file.name === 'blog.config.yaml') continue;
       
-      // Try to fetch the file content to extract title and metadata
-      if (file.download_url) {
-        try {
-          const response = await fetch(file.download_url, { next: { revalidate: 300 } });
-          if (response.ok) {
-            const content = await response.text();
-            return extractPostMetadata(slug, content);
+      if (file.type === 'dir') {
+        // Recursively scan subdirectory
+        await scanDirectory(`${path}/${file.name}`, prefix ? `${prefix}/${file.name}` : file.name);
+      } else if (file.type === 'file' && file.name.endsWith('.md')) {
+        const baseName = file.name.replace(/\.md$/, '');
+        const slug = prefix ? `${prefix}/${baseName}` : baseName;
+        
+        // Try to fetch the file content to extract title and metadata
+        if (file.download_url) {
+          try {
+            const response = await fetch(file.download_url, { next: { revalidate: 300 } });
+            if (response.ok) {
+              const content = await response.text();
+              posts.push(extractPostMetadata(slug, content));
+              continue;
+            }
+          } catch {
+            // Fall back to slug-based title
           }
-        } catch {
-          // Fall back to slug-based title
         }
+        
+        posts.push({
+          slug,
+          title: humanizeSlug(baseName),
+        });
       }
-      
-      return {
-        slug,
-        title: humanizeSlug(slug),
-      };
-    })
-  );
+    }
+  }
+  
+  await scanDirectory('blog');
 
   // Sort by date (newest first) or alphabetically if no date
   posts.sort((a, b) => {

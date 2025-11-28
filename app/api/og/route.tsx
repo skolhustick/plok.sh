@@ -1,11 +1,8 @@
 import { ImageResponse } from 'next/og';
+import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
-export const alt = 'Blog post';
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
 
-// Theme colors for OG images
 const THEME_COLORS: Record<string, { bg: string; fg: string; accent: string; muted: string }> = {
   'github-light': { bg: '#ffffff', fg: '#24292f', accent: '#0969da', muted: '#656d76' },
   'github-dark': { bg: '#0d1117', fg: '#e6edf3', accent: '#58a6ff', muted: '#7d8590' },
@@ -30,56 +27,58 @@ const THEME_COLORS: Record<string, { bg: string; fg: string; accent: string; mut
   'ayu-dark': { bg: '#0d1017', fg: '#bfbdb6', accent: '#ffb454', muted: '#636a72' },
 };
 
-// Simple frontmatter parser for edge
-function parseFrontmatter(content: string) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return {};
-  const fm = match[1];
-  const title = fm.match(/^title:\s*["']?(.+?)["']?$/m)?.[1];
-  const date = fm.match(/^date:\s*["']?(.+?)["']?$/m)?.[1];
-  const description = fm.match(/^description:\s*["']?(.+?)["']?$/m)?.[1];
-  return { title, date, description };
+function humanizeSlug(slug: string): string {
+  const baseName = slug.split('/').pop() || slug;
+  return baseName
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-export default async function Image({
-  params,
-}: {
-  params: Promise<{ user: string; repo: string; slug: string }>;
-}) {
-  const { user, repo, slug } = await params;
-
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const user = searchParams.get('user') || '';
+  const repo = searchParams.get('repo') || '';
+  const slug = searchParams.get('slug') || '';
+  
   let theme = 'rose-pine';
-  let blogTitle = repo;
-  let title = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  let title = humanizeSlug(slug);
   let description = '';
-  let date = '';
+  let blogTitle = repo;
 
+  // Fetch blog config for theme
   try {
-    // Fetch config (lightweight)
     const configRes = await fetch(
       `https://raw.githubusercontent.com/${user}/${repo}/main/blog/blog.config.yaml`
     );
     if (configRes.ok) {
       const yaml = await configRes.text();
       const themeMatch = yaml.match(/^theme:\s*["']?(.+?)["']?$/m);
-      const titleMatch = yaml.match(/^title:\s*["']?(.+?)["']?$/m);
+      const blogTitleMatch = yaml.match(/^title:\s*["']?(.+?)["']?$/m);
       if (themeMatch) theme = themeMatch[1];
-      if (titleMatch) blogTitle = titleMatch[1];
+      if (blogTitleMatch) blogTitle = blogTitleMatch[1];
     }
+  } catch {
+    // Use defaults
+  }
 
-    // Fetch post content
+  // Fetch post content for title/description
+  try {
     const postRes = await fetch(
       `https://raw.githubusercontent.com/${user}/${repo}/main/blog/${slug}.md`
     );
     if (postRes.ok) {
       const content = await postRes.text();
-      const parsed = parseFrontmatter(content);
-      if (parsed.title) title = parsed.title;
-      if (parsed.description) description = parsed.description;
-      if (parsed.date) date = parsed.date;
+      const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+      if (frontmatterMatch) {
+        const frontmatter = frontmatterMatch[1];
+        const titleMatch = frontmatter.match(/^title:\s*["']?(.+?)["']?$/m);
+        const descMatch = frontmatter.match(/^description:\s*["']?(.+?)["']?$/m);
+        if (titleMatch) title = titleMatch[1];
+        if (descMatch) description = descMatch[1];
+      }
     }
   } catch {
-    // Use defaults on error
+    // Use defaults
   }
 
   const colors = THEME_COLORS[theme] || THEME_COLORS['rose-pine'];
@@ -96,45 +95,22 @@ export default async function Image({
           padding: '60px',
         }}
       >
-        {/* Top bar with branding */}
+        {/* Top bar */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            gap: '12px',
             marginBottom: '40px',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-            }}
-          >
-            <span
-              style={{
-                fontSize: '24px',
-                fontWeight: 700,
-                color: colors.fg,
-              }}
-            >
-              plok.sh
-            </span>
-            <span style={{ color: colors.muted, fontSize: '24px' }}>/</span>
-            <span style={{ color: colors.muted, fontSize: '24px' }}>{user}</span>
-            <span style={{ color: colors.muted, fontSize: '24px' }}>/</span>
-            <span style={{ color: colors.accent, fontSize: '24px' }}>{repo}</span>
-          </div>
-          {date && (
-            <span style={{ color: colors.muted, fontSize: '20px' }}>
-              {new Date(date).toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-            </span>
-          )}
+          <span style={{ fontSize: '24px', fontWeight: 700, color: colors.fg }}>
+            plok.sh
+          </span>
+          <span style={{ color: colors.muted, fontSize: '24px' }}>/</span>
+          <span style={{ color: colors.muted, fontSize: '24px' }}>{user}</span>
+          <span style={{ color: colors.muted, fontSize: '24px' }}>/</span>
+          <span style={{ color: colors.accent, fontSize: '24px' }}>{repo}</span>
         </div>
 
         {/* Main content */}
@@ -148,12 +124,11 @@ export default async function Image({
         >
           <h1
             style={{
-              fontSize: title.length > 50 ? '48px' : '64px',
+              fontSize: '64px',
               fontWeight: 700,
               color: colors.fg,
-              lineHeight: 1.2,
+              lineHeight: 1.1,
               marginBottom: '20px',
-              maxWidth: '900px',
             }}
           >
             {title}
@@ -164,7 +139,7 @@ export default async function Image({
                 fontSize: '28px',
                 color: colors.muted,
                 lineHeight: 1.4,
-                maxWidth: '800px',
+                maxWidth: '900px',
               }}
             >
               {description}
@@ -179,26 +154,19 @@ export default async function Image({
             alignItems: 'center',
             justifyContent: 'space-between',
             borderTop: `2px solid ${colors.accent}`,
-            paddingTop: '30px',
+            paddingTop: '24px',
           }}
         >
-          <span style={{ color: colors.muted, fontSize: '22px' }}>{blogTitle}</span>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              color: colors.accent,
-              fontSize: '20px',
-            }}
-          >
-            <span>Read on plok.sh →</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ color: colors.muted, fontSize: '20px' }}>📝</span>
+            <span style={{ color: colors.muted, fontSize: '20px' }}>{blogTitle}</span>
           </div>
+          <span style={{ color: colors.accent, fontSize: '18px' }}>
+            plok.sh/{user}/{repo}/{slug}
+          </span>
         </div>
       </div>
     ),
-    {
-      ...size,
-    }
+    { width: 1200, height: 630 }
   );
 }

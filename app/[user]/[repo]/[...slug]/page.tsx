@@ -6,26 +6,45 @@ import { renderMarkdown } from '@/lib/markdown';
 import { DEFAULT_CONFIG } from '@/lib/config';
 import { resolveTheme } from '@/lib/themes';
 import { notFound } from 'next/navigation';
+import { humanizeSlug } from '@/lib/slug';
+import type { Metadata } from 'next';
 
 interface Props {
-  params: Promise<{ user: string; repo: string; slug: string }>;
+  params: Promise<{ user: string; repo: string; slug: string[] }>;
 }
 
 export const revalidate = 300; // 5 minutes
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { user, repo, slug } = await params;
+  const slugPath = slug.join('/');
+  const displayName = humanizeSlug(slug[slug.length - 1]);
+  
+  const ogImageUrl = `https://plok.sh/api/og?user=${encodeURIComponent(user)}&repo=${encodeURIComponent(repo)}&slug=${encodeURIComponent(slugPath)}`;
+  
   return {
-    title: `${slug} - ${repo} - plok.sh`,
+    title: `${displayName} - ${repo} - plok.sh`,
+    openGraph: {
+      title: `${displayName} - ${repo}`,
+      siteName: 'plok.sh',
+      type: 'article',
+      images: [{ url: ogImageUrl, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${displayName} - ${repo}`,
+      images: [ogImageUrl],
+    },
   };
 }
 
 export default async function PostPage({ params }: Props) {
   const { user, repo, slug } = await params;
+  const slugPath = slug.join('/');
 
   const [configResult, contentResult] = await Promise.all([
     getRepoConfig(user, repo),
-    getPostContent(user, repo, slug),
+    getPostContent(user, repo, slugPath),
   ]);
 
   const config = configResult.ok ? configResult.value.config : DEFAULT_CONFIG;
@@ -41,7 +60,7 @@ export default async function PostPage({ params }: Props) {
         breadcrumbs={[
           { label: user, href: `/${user}` },
           { label: repo, href: `/${user}/${repo}` },
-          { label: slug },
+          { label: slug[slug.length - 1] },
         ]}
         theme={config.theme}
         font={config.font}
@@ -62,7 +81,7 @@ export default async function PostPage({ params }: Props) {
     rendered = await renderMarkdown(
       contentResult.value,
       resolveTheme(config.theme),
-      slug
+      slugPath
     );
   } catch (error) {
     // Fallback: show escaped raw content
@@ -76,7 +95,7 @@ export default async function PostPage({ params }: Props) {
         breadcrumbs={[
           { label: user, href: `/${user}` },
           { label: repo, href: `/${user}/${repo}` },
-          { label: slug },
+          { label: slug[slug.length - 1] },
         ]}
         theme={config.theme}
         font={config.font}
@@ -102,7 +121,7 @@ export default async function PostPage({ params }: Props) {
       breadcrumbs={[
         { label: user, href: `/${user}` },
         { label: repo, href: `/${user}/${repo}` },
-        { label: slug },
+        { label: slug[slug.length - 1] },
       ]}
       theme={config.theme}
       font={config.font}
@@ -119,7 +138,7 @@ export default async function PostPage({ params }: Props) {
           hasFrontmatter={rendered.hasFrontmatter}
           user={user}
           repo={repo}
-          slug={slug}
+          slug={slugPath}
         />
       </div>
     </Shell>
