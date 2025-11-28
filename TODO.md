@@ -13,6 +13,5 @@
 ## 📝 Content
 
 - [ ] Write welcome blog post explaining plok.sh
-- [ ] Create About page (Easter egg via `?` icon in footer)
-- [ ] Update README.md for GitHub
+- [X] Update README.md for GitHub
 - [X] Add FAQs section
