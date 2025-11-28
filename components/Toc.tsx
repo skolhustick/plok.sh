@@ -16,11 +16,11 @@ export function Toc({ items }: TocProps) {
         {items.map((item) => (
           <li
             key={item.id}
-            style={{ paddingLeft: item.level === 3 ? '1rem' : '0' }}
+            style={{ paddingLeft: item.level === 2 ? '0.5rem' : item.level === 3 ? '1rem' : '0' }}
           >
             <a
               href={`#${item.id}`}
-              className="text-[var(--muted)] hover:text-[var(--link)] transition-colors block"
+              className={`text-[var(--muted)] hover:text-[var(--link)] transition-colors block ${item.level === 1 ? 'font-medium' : ''}`}
             >
               {item.text}
             </a>

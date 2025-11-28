@@ -104,8 +104,8 @@ export async function renderMarkdown(
     const text = contentToken?.content || '';
     const id = slugifyHeading(text);
 
-    // Collect h2/h3 for TOC
-    if (level === 2 || level === 3) {
+    // Collect h1/h2/h3 for TOC
+    if (level === 1 || level === 2 || level === 3) {
       toc.push({ level, text, id });
     }
 

@@ -25,9 +25,9 @@ export function RepoCard({ repo, user }: RepoCardProps) {
       href={`/${user}/${repo.name}`}
       data-theme={theme}
       data-font={font}
-      className="group flex items-center gap-4 p-4 rounded-lg border border-[var(--border)] hover:border-[var(--accent)] bg-[var(--bg)] transition-all"
+      className="group flex items-center gap-4 p-4 rounded-lg border border-[var(--border)] hover:border-[var(--accent)] bg-[var(--bg)] transition-all overflow-hidden"
     >
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 overflow-hidden">
         <div className="flex items-center gap-2">
           <h3 className="font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors truncate">
             {title}
