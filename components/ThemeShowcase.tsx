@@ -20,6 +20,13 @@ const THEME_COLORS: Record<string, { bg: string; fg: string; accent: string; mut
   'rose-pine': { bg: '#191724', fg: '#e0def4', accent: '#c4a7e7', muted: '#6e6a86', code: '#1f1d2e' },
   'rose-pine-moon': { bg: '#232136', fg: '#e0def4', accent: '#c4a7e7', muted: '#6e6a86', code: '#2a273f' },
   'rose-pine-dawn': { bg: '#faf4ed', fg: '#575279', accent: '#907aa9', muted: '#9893a5', code: '#f2e9e1' },
+  'vesper': { bg: '#101010', fg: '#b0b0b0', accent: '#ffc799', muted: '#606060', code: '#1a1a1a' },
+  'everforest': { bg: '#2d353b', fg: '#d3c6aa', accent: '#a7c080', muted: '#859289', code: '#272e33' },
+  'catppuccin-latte': { bg: '#eff1f5', fg: '#4c4f69', accent: '#8839ef', muted: '#8c8fa1', code: '#e6e9ef' },
+  'catppuccin-frappe': { bg: '#303446', fg: '#c6d0f5', accent: '#ca9ee6', muted: '#a5adce', code: '#292c3c' },
+  'catppuccin-macchiato': { bg: '#24273a', fg: '#cad3f5', accent: '#c6a0f6', muted: '#a5adcb', code: '#1e2030' },
+  'catppuccin-mocha': { bg: '#1e1e2e', fg: '#cdd6f4', accent: '#cba6f7', muted: '#a6adc8', code: '#181825' },
+  'ayu-dark': { bg: '#0d1017', fg: '#bfbdb6', accent: '#ffb454', muted: '#636a72', code: '#131721' },
 };
 
 interface ThemeShowcaseProps {
@@ -78,7 +85,7 @@ export function ThemeShowcase({ initialHtml }: ThemeShowcaseProps) {
             Pick your vibe ✨
           </h1>
           <p className="text-lg text-[var(--muted)] max-w-md mx-auto">
-            14 beautiful themes to make your blog feel like home
+            21 beautiful themes to make your blog feel like home
           </p>
         </div>
 

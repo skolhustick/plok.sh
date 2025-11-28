@@ -13,6 +13,13 @@ export const THEME_LIST = [
   'rose-pine',
   'rose-pine-moon',
   'rose-pine-dawn',
+  'vesper',
+  'everforest',
+  'catppuccin-latte',
+  'catppuccin-frappe',
+  'catppuccin-macchiato',
+  'catppuccin-mocha',
+  'ayu-dark',
 ] as const;
 
 export type ThemeName = (typeof THEME_LIST)[number];
@@ -63,6 +70,13 @@ export function mapThemeToShikiTheme(themeName: ThemeName): string {
     'rose-pine': 'rose-pine',
     'rose-pine-moon': 'rose-pine-moon',
     'rose-pine-dawn': 'rose-pine-dawn',
+    vesper: 'vesper',
+    everforest: 'everforest-dark',
+    'catppuccin-latte': 'catppuccin-latte',
+    'catppuccin-frappe': 'catppuccin-frappe',
+    'catppuccin-macchiato': 'catppuccin-macchiato',
+    'catppuccin-mocha': 'catppuccin-mocha',
+    'ayu-dark': 'ayu-dark',
   };
   return mapping[themeName] || 'github-dark';
 }

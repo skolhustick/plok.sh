@@ -8,9 +8,9 @@
     [X] Have a `show config` or something which shows their current config in a modal or something. 
     [X] Show if no config `add a config` CTA which goes to /themes
 
-[] Add more fonts option
+[X] Add more fonts option
 
-[] Add more themes
+[X] Add more themes
 
 [] Add the rest option (show toc etc.) to the config builder. 
 

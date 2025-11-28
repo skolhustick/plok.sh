@@ -187,6 +187,97 @@
   --link-hover: #d7827e;
 }
 
+/* Vesper */
+[data-theme="vesper"] {
+  --bg: #101010;
+  --fg: #b0b0b0;
+  --muted: #606060;
+  --border: #252525;
+  --accent: #ffc799;
+  --code-bg: #1a1a1a;
+  --code-fg: #b0b0b0;
+  --link: #ffc799;
+  --link-hover: #ffdfbf;
+}
+
+/* Everforest Dark */
+[data-theme="everforest"] {
+  --bg: #2d353b;
+  --fg: #d3c6aa;
+  --muted: #859289;
+  --border: #475258;
+  --accent: #a7c080;
+  --code-bg: #272e33;
+  --code-fg: #d3c6aa;
+  --link: #7fbbb3;
+  --link-hover: #83c092;
+}
+
+/* Catppuccin Latte (Light) */
+[data-theme="catppuccin-latte"] {
+  --bg: #eff1f5;
+  --fg: #4c4f69;
+  --muted: #8c8fa1;
+  --border: #ccd0da;
+  --accent: #8839ef;
+  --code-bg: #e6e9ef;
+  --code-fg: #4c4f69;
+  --link: #1e66f5;
+  --link-hover: #8839ef;
+}
+
+/* Catppuccin Frappé */
+[data-theme="catppuccin-frappe"] {
+  --bg: #303446;
+  --fg: #c6d0f5;
+  --muted: #a5adce;
+  --border: #414559;
+  --accent: #ca9ee6;
+  --code-bg: #292c3c;
+  --code-fg: #c6d0f5;
+  --link: #8caaee;
+  --link-hover: #ca9ee6;
+}
+
+/* Catppuccin Macchiato */
+[data-theme="catppuccin-macchiato"] {
+  --bg: #24273a;
+  --fg: #cad3f5;
+  --muted: #a5adcb;
+  --border: #363a4f;
+  --accent: #c6a0f6;
+  --code-bg: #1e2030;
+  --code-fg: #cad3f5;
+  --link: #8aadf4;
+  --link-hover: #c6a0f6;
+}
+
+/* Catppuccin Mocha */
+[data-theme="catppuccin-mocha"] {
+  --bg: #1e1e2e;
+  --fg: #cdd6f4;
+  --muted: #a6adc8;
+  --border: #313244;
+  --accent: #cba6f7;
+  --code-bg: #181825;
+  --code-fg: #cdd6f4;
+  --link: #89b4fa;
+  --link-hover: #cba6f7;
+}
+
+/* Ayu Dark */
+[data-theme="ayu-dark"] {
+  --bg: #0d1017;
+  --fg: #bfbdb6;
+  --muted: #636a72;
+  --border: #1c232d;
+  --accent: #ffb454;
+  --code-bg: #131721;
+  --code-fg: #bfbdb6;
+  --link: #59c2ff;
+  --link-hover: #ffb454;
+}
+
 /* ============================================================================
    Font Variables
    ============================================================================ */
