@@ -116,6 +116,7 @@ export default async function PostPage({ params }: Props) {
           title={rendered.title}
           date={rendered.date}
           description={rendered.description}
+          hasFrontmatter={rendered.hasFrontmatter}
           user={user}
           repo={repo}
           slug={slug}

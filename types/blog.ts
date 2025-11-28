@@ -43,6 +43,7 @@ export interface RenderedPost {
   toc: TocItem[];
   date?: string;
   description?: string;
+  hasFrontmatter: boolean;
 }
 
 // ============================================================================

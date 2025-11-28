@@ -42,6 +42,7 @@ async function getHighlighter(theme: string): Promise<Highlighter> {
  */
 export function parseFrontmatter(text: string): {
   content: string;
+  hasFrontmatter: boolean;
   title?: string;
   date?: string;
   description?: string;
@@ -49,7 +50,7 @@ export function parseFrontmatter(text: string): {
   const frontmatterMatch = text.match(/^---\n([\s\S]*?)\n---\n?/);
   
   if (!frontmatterMatch) {
-    return { content: text };
+    return { content: text, hasFrontmatter: false };
   }
 
   const frontmatter = frontmatterMatch[1];
@@ -61,6 +62,7 @@ export function parseFrontmatter(text: string): {
 
   return {
     content,
+    hasFrontmatter: true,
     title: titleMatch?.[1],
     date: dateMatch?.[1],
     description: descMatch?.[1],
@@ -76,13 +78,12 @@ export async function renderMarkdown(
   slug: string
 ): Promise<RenderedPost> {
   // Strip frontmatter before rendering
-  const { content: markdownContent, title: frontmatterTitle, date, description } = parseFrontmatter(text);
+  const { content: markdownContent, title: frontmatterTitle, date, description, hasFrontmatter } = parseFrontmatter(text);
 
   const shikiTheme = mapThemeToShikiTheme(themeName);
   const highlighter = await getHighlighter(shikiTheme);
 
   const toc: TocItem[] = [];
-  let firstH1: string | null = null;
 
   // Configure markdown-it
   const md = new MarkdownIt({
@@ -102,11 +103,6 @@ export async function renderMarkdown(
     const contentToken = tokens[idx + 1];
     const text = contentToken?.content || '';
     const id = slugifyHeading(text);
-
-    // Extract first H1 as title
-    if (level === 1 && firstH1 === null) {
-      firstH1 = text;
-    }
 
     // Collect h2/h3 for TOC
     if (level === 2 || level === 3) {
@@ -143,8 +139,8 @@ export async function renderMarkdown(
 
   const html = md.render(markdownContent);
 
-  // Determine title: frontmatter > first H1 > humanized slug
-  const title = frontmatterTitle || firstH1 || humanizeSlug(slug);
+  // Determine title: frontmatter title or humanized slug (let user handle their own H1s)
+  const title = frontmatterTitle || humanizeSlug(slug);
 
-  return { title, html, toc, date, description };
+  return { title, html, toc, date, description, hasFrontmatter };
 }
