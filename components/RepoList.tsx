@@ -80,7 +80,7 @@ export function RepoList({ repos, user }: RepoListProps) {
           >
             Browse themes →
           </a>
-          <div>
+          <div className="space-y-1">
             <button
               onClick={handleRefresh}
               disabled={isRefreshing}
@@ -88,6 +88,7 @@ export function RepoList({ repos, user }: RepoListProps) {
             >
               {isRefreshing ? 'Refreshing...' : 'Just added a blog? Refresh ↻'}
             </button>
+            <p className="text-[10px] text-[var(--muted)] opacity-60">GitHub may take a few mins to update</p>
           </div>
         </div>
       </div>
@@ -101,7 +102,7 @@ export function RepoList({ repos, user }: RepoListProps) {
           <RepoCard key={repo.name} repo={repo} user={user} />
         ))}
       </div>
-      <div className="text-center">
+      <div className="text-center space-y-1">
         <button
           onClick={handleRefresh}
           disabled={isRefreshing}
@@ -109,6 +110,7 @@ export function RepoList({ repos, user }: RepoListProps) {
         >
           {isRefreshing ? 'Refreshing...' : 'Refresh ↻'}
         </button>
+        <p className="text-[10px] text-[var(--muted)] opacity-60">GitHub may take a few mins to update</p>
       </div>
     </div>
   );
