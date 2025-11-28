@@ -1,45 +1,45 @@
-[X] Check caching issues for new repos
-    [X] Might take sometime to appear
-    [X] Inform the user to check in abit or soemthing.
+# plok.sh TODO
 
-[X] The default theme for users without a theme config should follow `rose-pine`
+## 🚀 High Priority
 
-[X] On /username/repo ->
-    [X] Have a `show config` or something which shows their current config in a modal or something. 
-    [X] Show if no config `add a config` CTA which goes to /themes
+### Guide Page
+- [ ] Create `/guide` page with step-by-step setup
+- [ ] Explain Git basics, GitHub repo creation
+- [ ] Document frontmatter format with examples
+- [ ] Add link to guide in top nav menu
 
-[X] Add more fonts option
+### Homepage
+- [ ] Add "GA Support" to features section
+- [ ] Reduce subtitle font size on mobile
+- [ ] Replace "GitHub" text with icon in header
 
-[X] Add more themes
+---
 
-[] Have guide page which details step by step from using Git, to github etc. 
-    [] Concise but thorough.
-    [] Need to explain `frontmatter` as well. Show sample post etc. 
-    [] Put this links anywhere else needed.
+## 🎨 UI/UX Polish
 
+### Themes Page
+- [ ] Fix fake browser URL: `plok.sh/you/repo` → `plok.sh/you/repo/post-title`
+- [ ] Fix `geist-mono` wrapping on mobile (use 2-col grid)
 
-[] Fix issues with GA, edit Next.js headers config to allow GA to run. ( CSP Fix )
-[] Add `GA Support` to 'features' section below the input.
+### Config Builder
+- [ ] Add remaining options (show_toc, show_repo_link, etc.)
 
-[] Add an `about us` page. Use (?) a simple icon to go to that page from footer. ( almost like an easter egg )
+---
 
-[] Add the rest option (show toc etc.) to the config builder. 
-[] `geist-mono` becomes double line in mobile. maybe do grid 2 columns on mobile. and let the grid wrap, but the text remain one line. 
-[] plok.sh/you/your-repo on /themes page in fake browser should be plok.sh/you/your-repo/your-blog-title
+## 🐛 Bug Fixes
 
-[] Add guide to menu in top bar
+### Post View
+- [ ] Fix duplicate h1 when markdown has title + frontmatter title
+- [ ] Fix TOC not showing final headings (check if clamped)
+- [ ] Remove broken "Edit on GitHub" footer link
+- [ ] Remove/fix "View Source" link (incorrect path)
+- [ ] Fix filenames rendering as hyperlinks
 
-[] Replace the word `github` to just icon on top header. 
-[] Reduce the font size for subtitle on mobile, the para after github repo -> blog.
+---
 
+## 📝 Content
 
-[] Write a nice blog post as a welcome post explaining plok.sh
-
-[] Duplicated header when having h1 in markdown. need to remove one. Must handle frontmatter stuff as well.
-[] View Source path is not correct on content pages. Maybe remove that.
-[] filename are hyperlinks... 
-[] Some headings dont show up in TOC. The final two headers. Is there a clamp here?
-[] Remove Edit on Github in footer in content page. Broken link.
-
-[] Touch up Readme.md for Github.
-[] FaQs
+- [ ] Write welcome blog post explaining plok.sh
+- [ ] Create About page (Easter egg via `?` icon in footer)
+- [ ] Update README.md for GitHub
+- [ ] Add FAQs section

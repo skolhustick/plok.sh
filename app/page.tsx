@@ -53,6 +53,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <span className="font-bold text-lg">plok.sh</span>
           <nav className="flex items-center gap-6 text-sm">
+            <Link href="/guide" className="text-[var(--muted)] hover:text-[var(--fg)] transition-colors">
+              guide
+            </Link>
             <Link href="/themes" className="text-[var(--muted)] hover:text-[var(--fg)] transition-colors">
               themes
             </Link>
