@@ -1,5 +1,7 @@
 # plok.sh
 
+![plok.sh banner](https://plok.sh/banner-1200x630.jpg)
+
 **GitHub to blog, instantly.** Turn any GitHub repo's `/blog` folder into a beautiful, themed blog—no signup, no config, no deploy.
 
 🌐 **Live:** [plok.sh](https://plok.sh)
