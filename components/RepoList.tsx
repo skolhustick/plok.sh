@@ -1,5 +1,10 @@
+'use client';
+
 import type { RepoSummary } from '@/types/blog';
 import { RepoCard } from './RepoCard';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { refreshUserPage } from '@/app/actions';
 
 interface RepoListProps {
   repos: RepoSummary[];
@@ -7,6 +12,16 @@ interface RepoListProps {
 }
 
 export function RepoList({ repos, user }: RepoListProps) {
+  const router = useRouter();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await refreshUserPage(user);
+    router.refresh();
+    setIsRefreshing(false);
+  };
+
   if (repos.length === 0) {
     return (
       <div className="py-4 max-w-xl mx-auto">
@@ -58,23 +73,43 @@ export function RepoList({ repos, user }: RepoListProps) {
           </div>
         </div>
         
-        <div className="text-center mt-6">
+        <div className="text-center mt-6 space-y-3">
           <a 
             href="/themes" 
             className="text-sm text-[var(--accent)] hover:underline"
           >
             Browse themes →
           </a>
+          <div>
+            <button
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+              className="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors disabled:opacity-50"
+            >
+              {isRefreshing ? 'Refreshing...' : 'Just added a blog? Refresh ↻'}
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-4">
-      {repos.map((repo) => (
-        <RepoCard key={repo.name} repo={repo} user={user} />
-      ))}
+    <div className="space-y-4">
+      <div className="grid gap-4">
+        {repos.map((repo) => (
+          <RepoCard key={repo.name} repo={repo} user={user} />
+        ))}
+      </div>
+      <div className="text-center">
+        <button
+          onClick={handleRefresh}
+          disabled={isRefreshing}
+          className="text-xs text-[var(--muted)] hover:text-[var(--fg)] transition-colors disabled:opacity-50"
+        >
+          {isRefreshing ? 'Refreshing...' : 'Refresh ↻'}
+        </button>
+      </div>
     </div>
   );
 }
