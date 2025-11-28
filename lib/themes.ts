@@ -21,8 +21,8 @@ export const FONT_LIST = ['system', 'inter', 'jetbrains', 'geist-mono'] as const
 
 export type FontName = (typeof FONT_LIST)[number];
 
-export const DEFAULT_THEME: ThemeName = 'github-dark';
-export const DEFAULT_FONT: FontName = 'system';
+export const DEFAULT_THEME: ThemeName = 'rose-pine';
+export const DEFAULT_FONT: FontName = 'geist-mono';
 
 /**
  * Resolve theme name with fallback to default

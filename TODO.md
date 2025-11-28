@@ -1,6 +1,6 @@
-[] Check caching issues for new repos
-    [] Might take sometime to appear
-    [] Inform the user to check in abit or soemthing.
+[X] Check caching issues for new repos
+    [X] Might take sometime to appear
+    [X] Inform the user to check in abit or soemthing.
 
 [] The default theme for users without a theme config should follow `rose-pine`
 
