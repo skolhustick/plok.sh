@@ -17,7 +17,7 @@ export const THEME_LIST = [
 
 export type ThemeName = (typeof THEME_LIST)[number];
 
-export const FONT_LIST = ['system', 'inter', 'jetbrains', 'geist-mono'] as const;
+export const FONT_LIST = ['system', 'inter', 'manrope', 'space-grotesk', 'outfit', 'jetbrains', 'fira-code', 'geist-mono'] as const;
 
 export type FontName = (typeof FONT_LIST)[number];
 

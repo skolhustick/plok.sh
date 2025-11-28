@@ -28,7 +28,7 @@ export default async function PostPage({ params }: Props) {
     getPostContent(user, repo, slug),
   ]);
 
-  const config = configResult.ok ? configResult.value : DEFAULT_CONFIG;
+  const config = configResult.ok ? configResult.value.config : DEFAULT_CONFIG;
 
   if (!contentResult.ok) {
     if (contentResult.error.code === 'NOT_FOUND') {

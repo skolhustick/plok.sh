@@ -77,11 +77,12 @@ export function validateConfig(partial: Partial<BlogConfig>): BlogConfig {
 
 /**
  * Fetch and parse blog.config.yaml from a repo
+ * Returns the config and whether a config file exists
  */
 export async function getRepoConfig(
   user: string,
   repo: string
-): Promise<Result<BlogConfig>> {
+): Promise<Result<{ config: BlogConfig; hasConfigFile: boolean }>> {
   const contentsUrl = `https://api.github.com/repos/${user}/${repo}/contents/blog/blog.config.yaml`;
 
   const contentsResult = await githubFetch<{ download_url: string }>(contentsUrl, {
@@ -91,16 +92,16 @@ export async function getRepoConfig(
   // Config is optional - return defaults if not found
   if (!contentsResult.ok) {
     if (contentsResult.error.code === 'NOT_FOUND') {
-      return ok(DEFAULT_CONFIG);
+      return ok({ config: DEFAULT_CONFIG, hasConfigFile: false });
     }
     // For other errors, still return defaults but log
     console.warn('Failed to fetch config:', contentsResult.error);
-    return ok(DEFAULT_CONFIG);
+    return ok({ config: DEFAULT_CONFIG, hasConfigFile: false });
   }
 
   const downloadUrl = contentsResult.value.download_url;
   if (!downloadUrl) {
-    return ok(DEFAULT_CONFIG);
+    return ok({ config: DEFAULT_CONFIG, hasConfigFile: false });
   }
 
   // Fetch raw YAML content
@@ -110,15 +111,15 @@ export async function getRepoConfig(
     });
 
     if (!response.ok) {
-      return ok(DEFAULT_CONFIG);
+      return ok({ config: DEFAULT_CONFIG, hasConfigFile: false });
     }
 
     const yamlText = await response.text();
     const partial = parseConfigYaml(yamlText);
     const config = validateConfig(partial);
 
-    return ok(config);
+    return ok({ config, hasConfigFile: true, rawYaml: yamlText });
   } catch {
-    return ok(DEFAULT_CONFIG);
+    return ok({ config: DEFAULT_CONFIG, hasConfigFile: false });
   }
 }

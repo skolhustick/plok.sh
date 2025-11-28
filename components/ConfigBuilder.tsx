@@ -125,19 +125,31 @@ export function ConfigBuilder({ initialTheme, onConfigChange }: ConfigBuilderPro
         <div>
           <div className="text-xs text-[var(--muted)] mb-1">font</div>
           <div className="flex flex-wrap gap-1">
-            {FONT_LIST.map((f) => (
-              <button
-                key={f}
-                onClick={() => updateConfig({ font: f })}
-                className={`px-2 py-1 text-xs rounded border transition-colors ${
-                  f === config.font
-                    ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/10'
-                    : 'border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--fg)]'
-                }`}
-              >
-                {f}
-              </button>
-            ))}
+            {FONT_LIST.map((f) => {
+              const fontLabels: Record<string, string> = {
+                'system': 'System',
+                'inter': 'Inter',
+                'manrope': 'Manrope',
+                'space-grotesk': 'Space Grotesk',
+                'outfit': 'Outfit',
+                'jetbrains': 'JetBrains',
+                'fira-code': 'Fira Code',
+                'geist-mono': 'Geist Mono',
+              };
+              return (
+                <button
+                  key={f}
+                  onClick={() => updateConfig({ font: f })}
+                  className={`px-2 py-1 text-xs rounded border transition-colors ${
+                    f === config.font
+                      ? 'border-[var(--accent)] text-[var(--accent)] bg-[var(--accent)]/10'
+                      : 'border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--fg)]'
+                  }`}
+                >
+                  {fontLabels[f] || f}
+                </button>
+              );
+            })}
           </div>
         </div>
 

@@ -69,10 +69,10 @@ export default async function UserPage({ params }: Props) {
       if (configResult.ok) {
         return {
           ...repo,
-          blogTitle: configResult.value.title,
-          blogDescription: configResult.value.description,
-          blogTheme: configResult.value.theme,
-          blogFont: configResult.value.font,
+          blogTitle: configResult.value.config.title,
+          blogDescription: configResult.value.config.description,
+          blogTheme: configResult.value.config.theme,
+          blogFont: configResult.value.config.font,
         };
       }
       return repo;

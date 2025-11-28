@@ -135,20 +135,32 @@ export function ThemeShowcase({ initialHtml }: ThemeShowcaseProps) {
           <h2 className="text-sm font-medium text-[var(--muted)] mb-4 uppercase tracking-wide">
             Choose your font
           </h2>
-          <div className="flex gap-2">
-            {FONT_LIST.map((font) => (
-              <button
-                key={font}
-                onClick={() => setSelectedFont(font)}
-                className={`px-4 py-2 rounded-lg border transition-all ${
-                  font === selectedFont
-                    ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]'
-                    : 'border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--fg)]'
-                }`}
-              >
-                <span className="text-sm">{font}</span>
-              </button>
-            ))}
+          <div className="flex flex-wrap justify-center gap-2">
+            {FONT_LIST.map((font) => {
+              const fontLabels: Record<string, string> = {
+                'system': 'System',
+                'inter': 'Inter',
+                'manrope': 'Manrope',
+                'space-grotesk': 'Space Grotesk',
+                'outfit': 'Outfit',
+                'jetbrains': 'JetBrains',
+                'fira-code': 'Fira Code',
+                'geist-mono': 'Geist Mono',
+              };
+              return (
+                <button
+                  key={font}
+                  onClick={() => setSelectedFont(font)}
+                  className={`px-4 py-2 rounded-lg border transition-all ${
+                    font === selectedFont
+                      ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]'
+                      : 'border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--fg)]'
+                  }`}
+                >
+                  <span className="text-sm">{fontLabels[font] || font}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 

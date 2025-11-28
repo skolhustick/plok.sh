@@ -201,9 +201,29 @@
   --font-code: ui-monospace, SFMono-Regular, monospace;
 }
 
+[data-font="manrope"] {
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-code: ui-monospace, SFMono-Regular, monospace;
+}
+
+[data-font="space-grotesk"] {
+  --font-body: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-code: ui-monospace, SFMono-Regular, monospace;
+}
+
+[data-font="outfit"] {
+  --font-body: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-code: ui-monospace, SFMono-Regular, monospace;
+}
+
 [data-font="jetbrains"] {
   --font-body: var(--font-jetbrains), ui-monospace, monospace;
   --font-code: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+[data-font="fira-code"] {
+  --font-body: var(--font-fira-code), ui-monospace, monospace;
+  --font-code: var(--font-fira-code), ui-monospace, monospace;
 }
 
 [data-font="geist-mono"] {

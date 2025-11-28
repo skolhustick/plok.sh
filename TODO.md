@@ -2,11 +2,11 @@
     [X] Might take sometime to appear
     [X] Inform the user to check in abit or soemthing.
 
-[] The default theme for users without a theme config should follow `rose-pine`
+[X] The default theme for users without a theme config should follow `rose-pine`
 
-[] On /username/repo ->
-    [] Have a `show config` or something which shows their current config in a modal or something. 
-    [] Show if no config `add a config` CTA which goes to /themes
+[X] On /username/repo ->
+    [X] Have a `show config` or something which shows their current config in a modal or something. 
+    [X] Show if no config `add a config` CTA which goes to /themes
 
 [] Add more fonts option
 
