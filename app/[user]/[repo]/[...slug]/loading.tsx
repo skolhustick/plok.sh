@@ -2,7 +2,7 @@ import { Shell } from '@/components/Shell';
 
 export default function PostLoading() {
   return (
-    <Shell>
+    <Shell noWrapper>
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="animate-pulse">
           <div className="h-10 w-3/4 bg-[var(--border)] rounded mb-8" />

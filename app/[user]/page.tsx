@@ -26,7 +26,7 @@ export default async function UserPage({ params }: Props) {
   // Check if token is available
   if (!hasGitHubToken()) {
     return (
-      <Shell breadcrumbs={[{ label: user }]} theme="rose-pine" font="geist-mono">
+      <Shell breadcrumbs={[{ label: user }]} noWrapper>
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="text-center py-12">
             <h1 className="text-2xl font-bold text-[var(--fg)] mb-4">
@@ -56,7 +56,7 @@ export default async function UserPage({ params }: Props) {
     }
     // For other errors (like user not found from GitHub API), show a cute error with refresh
     return (
-      <Shell breadcrumbs={[{ label: user }]} theme="rose-pine" font="geist-mono">
+      <Shell breadcrumbs={[{ label: user }]} noWrapper>
         <UserNotFound user={user} />
       </Shell>
     );
@@ -80,7 +80,7 @@ export default async function UserPage({ params }: Props) {
   );
 
   return (
-    <Shell breadcrumbs={[{ label: user }]} theme="rose-pine" font="geist-mono">
+    <Shell breadcrumbs={[{ label: user }]} noWrapper>
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="flex justify-center mb-10">
           <a 

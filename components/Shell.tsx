@@ -12,16 +12,13 @@ interface ShellProps {
   theme?: string;
   font?: string;
   customerGaId?: string;
+  /** If true, skip the outer theme wrapper (used when layout already provides it) */
+  noWrapper?: boolean;
 }
 
-export function Shell({ children, breadcrumbs, theme, font, customerGaId }: ShellProps) {
-  return (
-    <div 
-      className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--fg)]"
-      style={{ fontFamily: 'var(--font-body)' }}
-      data-theme={theme}
-      data-font={font}
-    >
+export function Shell({ children, breadcrumbs, theme, font, customerGaId, noWrapper }: ShellProps) {
+  const content = (
+    <>
       <GoogleAnalytics customerGaId={customerGaId} />
       <header className="border-b border-[var(--border)] bg-[var(--bg)]">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
@@ -58,6 +55,21 @@ export function Shell({ children, breadcrumbs, theme, font, customerGaId }: Shel
       </header>
 
       <main className="flex-1">{children}</main>
+    </>
+  );
+
+  if (noWrapper) {
+    return <div className="min-h-screen flex flex-col">{content}</div>;
+  }
+
+  return (
+    <div 
+      className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--fg)]"
+      style={{ fontFamily: 'var(--font-body)' }}
+      data-theme={theme}
+      data-font={font}
+    >
+      {content}
     </div>
   );
 }

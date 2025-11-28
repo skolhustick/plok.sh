@@ -62,8 +62,7 @@ export default async function PostPage({ params }: Props) {
           { label: repo, href: `/${user}/${repo}` },
           { label: slug[slug.length - 1] },
         ]}
-        theme={config.theme}
-        font={config.font}
+        noWrapper
       >
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="p-4 bg-red-500/10 border border-red-500/20 rounded mb-8">
@@ -97,9 +96,8 @@ export default async function PostPage({ params }: Props) {
           { label: repo, href: `/${user}/${repo}` },
           { label: slug[slug.length - 1] },
         ]}
-        theme={config.theme}
-        font={config.font}
         customerGaId={config.ga_id ?? undefined}
+        noWrapper
       >
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded mb-8">
@@ -123,9 +121,8 @@ export default async function PostPage({ params }: Props) {
         { label: repo, href: `/${user}/${repo}` },
         { label: slug[slug.length - 1] },
       ]}
-      theme={config.theme}
-      font={config.font}
       customerGaId={config.ga_id ?? undefined}
+      noWrapper
     >
       <div className="max-w-4xl mx-auto px-6 py-12">
         <PostView
