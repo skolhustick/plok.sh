@@ -18,11 +18,17 @@
 ## 🎨 UI/UX Polish
 
 ### Themes Page
-- [ ] Fix fake browser URL: `plok.sh/you/repo` → `plok.sh/you/repo/post-title`
-- [ ] Fix `geist-mono` wrapping on mobile (use 2-col grid)
-
-### Config Builder
-- [ ] Add remaining options (show_toc, show_repo_link, etc.)
+- [] Desktop : 
+    [] Make theme, font, and config in first fold, one screen, more compact. 
+    [] Maybe the config selector on the left, the config file preview and copy on the right. 
+    [] Live preview at the bottom, can toggle desktop and mobile view. 
+- [] Mobile : 
+    [] A horizontal slider for themes and fonts. 
+    [] config preview below that. 
+    [] preview only for mobile.
+- [] Make top Pick your vibe ✨ text and subtext, more compact, fix wordings.
+- [] Font selection button, the name of font, should preview the font itself.
+- [] Add all the options for config yaml. make the card less bulky and more compact. focus on the yaml itself.
 
 ---
 
