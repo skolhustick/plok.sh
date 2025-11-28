@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="rose-pine" data-font="geist-mono">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} ${manrope.variable} ${spaceGrotesk.variable} ${outfit.variable} ${firaCode.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${geistMono.variable} ${manrope.variable} ${spaceGrotesk.variable} ${outfit.variable} ${firaCode.variable} antialiased overflow-x-hidden`}
       >
         {children}
       </body>

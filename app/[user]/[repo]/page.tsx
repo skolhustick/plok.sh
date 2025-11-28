@@ -45,7 +45,7 @@ export default async function RepoPage({ params }: Props) {
           font={config?.font}
           customerGaId={config?.ga_id ?? undefined}
         >
-          <div className="max-w-4xl mx-auto px-4 py-12">
+          <div className="max-w-4xl mx-auto px-6 py-12">
             <div className="text-center py-12">
               <h1 className="text-2xl font-bold text-[var(--fg)] mb-4">
                 No Blog Found
@@ -68,7 +68,7 @@ export default async function RepoPage({ params }: Props) {
         font={config?.font}
         customerGaId={config?.ga_id ?? undefined}
       >
-        <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="text-center py-12">
             <h1 className="text-2xl font-bold text-[var(--fg)] mb-4">Error</h1>
             <p className="text-[var(--muted)]">{postsResult.error.message}</p>
@@ -88,7 +88,7 @@ export default async function RepoPage({ params }: Props) {
       font={config?.font}
       customerGaId={config?.ga_id ?? undefined}
     >
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-6 py-12">
         <header className="mb-8">
           <div className="flex items-start justify-between gap-4">
             <div>

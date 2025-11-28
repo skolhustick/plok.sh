@@ -23,7 +23,7 @@ export default function UserError({
 
   return (
     <Shell theme="rose-pine" font="geist-mono">
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center">
+      <div className="max-w-4xl mx-auto px-6 py-24 text-center">
         <div className="font-mono text-4xl text-[var(--accent)] mb-6">
           {frames[frame]} error {frames[frame]}
         </div>

@@ -11,7 +11,7 @@ export default function RepoError({
 }) {
   return (
     <Shell>
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center">
+      <div className="max-w-4xl mx-auto px-6 py-24 text-center">
         <h1 className="text-2xl font-bold text-[var(--fg)] mb-4">
           Something went wrong
         </h1>

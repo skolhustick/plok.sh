@@ -198,12 +198,54 @@ console.log("Hello from plok.sh!");
               blog/blog.config.yaml
             </div>
             <pre className="p-4 text-sm font-mono overflow-x-auto">
+              <span className="text-[var(--muted)]"># Blog metadata</span>{'\n'}
               <span className="text-[var(--accent)]">title</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;My Awesome Blog&quot;</span>{'\n'}
-              <span className="text-[var(--accent)]">description</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;Thoughts on code and life&quot;</span>{'\n'}
+              <span className="text-[var(--accent)]">description</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;Thoughts on code and life&quot;</span>{'\n\n'}
+              <span className="text-[var(--muted)]"># Appearance</span>{'\n'}
               <span className="text-[var(--accent)]">theme</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;catppuccin-mocha&quot;</span>{'\n'}
-              <span className="text-[var(--accent)]">font</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;inter&quot;</span>{'\n'}
+              <span className="text-[var(--accent)]">font</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;inter&quot;</span>{'\n\n'}
+              <span className="text-[var(--muted)]"># Features</span>{'\n'}
+              <span className="text-[var(--accent)]">show_toc</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">true</span>{'\n'}
+              <span className="text-[var(--accent)]">show_repo_link</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">true</span>{'\n\n'}
+              <span className="text-[var(--muted)]"># Analytics (optional)</span>{'\n'}
               <span className="text-[var(--accent)]">ga_id</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;G-XXXXXXXXXX&quot;</span>
             </pre>
+          </div>
+
+          {/* Config options explained */}
+          <div className="space-y-4 mb-8">
+            <h3 className="text-lg font-semibold text-[var(--fg)]">Config options explained</h3>
+            
+            <div className="grid gap-3 text-sm">
+              <div className="flex gap-4 items-start p-3 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+                <code className="px-2 py-1 bg-[var(--bg)] rounded text-[var(--accent)] shrink-0">title</code>
+                <span className="text-[var(--muted)]">Your blog&apos;s name. Shows in the header and browser tab.</span>
+              </div>
+              <div className="flex gap-4 items-start p-3 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+                <code className="px-2 py-1 bg-[var(--bg)] rounded text-[var(--accent)] shrink-0">description</code>
+                <span className="text-[var(--muted)]">A short tagline. Shows below the title on the blog page.</span>
+              </div>
+              <div className="flex gap-4 items-start p-3 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+                <code className="px-2 py-1 bg-[var(--bg)] rounded text-[var(--accent)] shrink-0">theme</code>
+                <span className="text-[var(--muted)]">Color scheme. <Link href="/themes" className="text-[var(--link)] hover:underline">21 themes available</Link> (default: rose-pine)</span>
+              </div>
+              <div className="flex gap-4 items-start p-3 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+                <code className="px-2 py-1 bg-[var(--bg)] rounded text-[var(--accent)] shrink-0">font</code>
+                <span className="text-[var(--muted)]">Typography. Options: system, inter, manrope, space-grotesk, outfit, jetbrains, fira-code, geist-mono</span>
+              </div>
+              <div className="flex gap-4 items-start p-3 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+                <code className="px-2 py-1 bg-[var(--bg)] rounded text-[var(--accent)] shrink-0">show_toc</code>
+                <span className="text-[var(--muted)]">Show table of contents on posts. <code className="px-1 bg-[var(--bg)] rounded">true</code> or <code className="px-1 bg-[var(--bg)] rounded">false</code> (default: true)</span>
+              </div>
+              <div className="flex gap-4 items-start p-3 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+                <code className="px-2 py-1 bg-[var(--bg)] rounded text-[var(--accent)] shrink-0">show_repo_link</code>
+                <span className="text-[var(--muted)]">Show &quot;View on GitHub&quot; link. <code className="px-1 bg-[var(--bg)] rounded">true</code> or <code className="px-1 bg-[var(--bg)] rounded">false</code> (default: true)</span>
+              </div>
+              <div className="flex gap-4 items-start p-3 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+                <code className="px-2 py-1 bg-[var(--bg)] rounded text-[var(--accent)] shrink-0">ga_id</code>
+                <span className="text-[var(--muted)]">Google Analytics ID for tracking visitors. See below for setup.</span>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -213,6 +255,57 @@ console.log("Hello from plok.sh!");
             >
               Browse 21 themes →
             </Link>
+          </div>
+        </section>
+
+        {/* Google Analytics */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
+            <span className="text-[var(--accent)]">6.</span> Google Analytics (optional)
+          </h2>
+          <p className="text-[var(--muted)] mb-6">
+            Track your visitors with Google Analytics. Just add your GA ID to the config.
+          </p>
+
+          <div className="space-y-6">
+            <div className="bg-[var(--code-bg)] rounded-lg p-6 border border-[var(--border)]">
+              <h3 className="font-semibold text-[var(--fg)] mb-4">How to get your GA ID:</h3>
+              <ol className="space-y-3 text-sm text-[var(--muted)]">
+                <li className="flex gap-3">
+                  <span className="text-[var(--accent)] font-bold">1.</span>
+                  <span>Go to <a href="https://analytics.google.com" target="_blank" rel="noopener noreferrer" className="text-[var(--link)] hover:underline">analytics.google.com</a></span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[var(--accent)] font-bold">2.</span>
+                  <span>Create an account or sign in</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[var(--accent)] font-bold">3.</span>
+                  <span>Create a new property for your blog</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[var(--accent)] font-bold">4.</span>
+                  <span>Go to <strong className="text-[var(--fg)]">Admin → Data Streams → Web</strong></span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[var(--accent)] font-bold">5.</span>
+                  <span>Copy your <strong className="text-[var(--fg)]">Measurement ID</strong> (starts with <code className="px-1 bg-[var(--bg)] rounded">G-</code>)</span>
+                </li>
+              </ol>
+            </div>
+
+            <div className="bg-[var(--code-bg)] rounded-lg border border-[var(--border)] overflow-hidden">
+              <div className="px-4 py-2 border-b border-[var(--border)] text-sm text-[var(--muted)]">
+                Add to blog.config.yaml
+              </div>
+              <pre className="p-4 text-sm font-mono">
+                <span className="text-[var(--accent)]">ga_id</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;G-XXXXXXXXXX&quot;</span>
+              </pre>
+            </div>
+
+            <p className="text-sm text-[var(--muted)]">
+              💡 Your analytics data stays in <strong className="text-[var(--fg)]">your</strong> Google Analytics account. plok.sh doesn&apos;t see your visitor data.
+            </p>
           </div>
         </section>
 
@@ -238,6 +331,63 @@ console.log("Hello from plok.sh!");
               <p className="text-[var(--fg)] font-medium mb-1">Multiple blogs? No problem</p>
               <p className="text-sm text-[var(--muted)]">
                 Each repo with a <code className="px-1 bg-[var(--bg)] rounded">/blog</code> folder becomes a separate blog.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQs */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-[var(--fg)] mb-6">
+            ❓ FAQs
+          </h2>
+          <div className="space-y-4">
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">Can I use this for documentation?</p>
+              <p className="text-sm text-[var(--muted)]">
+                Absolutely! Just create a <code className="px-1 bg-[var(--bg)] rounded">/blog</code> folder in your project repo and add your docs as markdown files. Great for changelogs, tutorials, or project guides.
+              </p>
+            </div>
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">Do I need to sign up?</p>
+              <p className="text-sm text-[var(--muted)]">
+                Nope! plok.sh reads directly from public GitHub repos. No account, no API keys, no setup.
+              </p>
+            </div>
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">Can I use a private repo?</p>
+              <p className="text-sm text-[var(--muted)]">
+                Not yet. plok.sh only works with public repositories. Private repo support may come in the future.
+              </p>
+            </div>
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">Can I use a custom domain?</p>
+              <p className="text-sm text-[var(--muted)]">
+                Not currently. Your blog lives at <code className="px-1 bg-[var(--bg)] rounded">plok.sh/username/repo</code>. Custom domains are on the roadmap.
+              </p>
+            </div>
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">How do I delete my blog?</p>
+              <p className="text-sm text-[var(--muted)]">
+                Just delete the <code className="px-1 bg-[var(--bg)] rounded">/blog</code> folder from your repo, or make the repo private. There&apos;s nothing to &quot;delete&quot; on plok.sh — we don&apos;t store your content.
+              </p>
+            </div>
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">Is there a post limit?</p>
+              <p className="text-sm text-[var(--muted)]">
+                No limits. Add as many markdown files as you want. Just keep them in the <code className="px-1 bg-[var(--bg)] rounded">/blog</code> folder.
+              </p>
+            </div>
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">Can I organize posts in subfolders?</p>
+              <p className="text-sm text-[var(--muted)]">
+                Not yet. All posts should be directly in the <code className="px-1 bg-[var(--bg)] rounded">/blog</code> folder. Subfolder support is planned.
+              </p>
+            </div>
+            <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
+              <p className="text-[var(--fg)] font-medium mb-2">Does it support images?</p>
+              <p className="text-sm text-[var(--muted)]">
+                Yes! Use standard markdown image syntax. Host images in your repo or use external URLs like <code className="px-1 bg-[var(--bg)] rounded">![alt](https://...)</code>
               </p>
             </div>
           </div>

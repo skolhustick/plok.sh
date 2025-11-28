@@ -29,7 +29,7 @@ export default function NotFound() {
 
   return (
     <Shell theme="rose-pine" font="geist-mono">
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center">
+      <div className="max-w-4xl mx-auto px-6 py-24 text-center">
         <div className="font-mono text-6xl text-[var(--accent)] mb-8">
           {frames[frame]} 404 {frames[frame]}
         </div>

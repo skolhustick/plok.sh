@@ -46,7 +46,7 @@ export default async function PostPage({ params }: Props) {
         theme={config.theme}
         font={config.font}
       >
-        <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="p-4 bg-red-500/10 border border-red-500/20 rounded mb-8">
             <h2 className="text-red-500 font-semibold mb-2">Error loading post</h2>
             <p className="text-[var(--muted)]">{contentResult.error.message}</p>
@@ -82,7 +82,7 @@ export default async function PostPage({ params }: Props) {
         font={config.font}
         customerGaId={config.ga_id ?? undefined}
       >
-        <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded mb-8">
             <h2 className="text-yellow-500 font-semibold mb-2">
               Markdown parsing failed
@@ -108,7 +108,7 @@ export default async function PostPage({ params }: Props) {
       font={config.font}
       customerGaId={config.ga_id ?? undefined}
     >
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-6 py-12">
         <PostView
           html={rendered.html}
           toc={rendered.toc}

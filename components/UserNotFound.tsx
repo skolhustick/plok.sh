@@ -20,7 +20,7 @@ export function UserNotFound({ user }: UserNotFoundProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+    <div className="max-w-4xl mx-auto px-6 py-16 text-center">
       <div className="text-6xl mb-6">👻</div>
       <h1 className="text-2xl font-bold text-[var(--fg)] mb-3">
         User not found

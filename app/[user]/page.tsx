@@ -27,7 +27,7 @@ export default async function UserPage({ params }: Props) {
   if (!hasGitHubToken()) {
     return (
       <Shell breadcrumbs={[{ label: user }]} theme="rose-pine" font="geist-mono">
-        <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="text-center py-12">
             <h1 className="text-2xl font-bold text-[var(--fg)] mb-4">
               Token Required
@@ -81,7 +81,7 @@ export default async function UserPage({ params }: Props) {
 
   return (
     <Shell breadcrumbs={[{ label: user }]} theme="rose-pine" font="geist-mono">
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="flex justify-center mb-10">
           <a 
             href={`https://github.com/${user}`}

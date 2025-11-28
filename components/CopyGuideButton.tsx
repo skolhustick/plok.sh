@@ -85,18 +85,83 @@ Add a config file to change themes, fonts, and more.
 **File:** \`blog/blog.config.yaml\`
 
 \`\`\`yaml
+# Blog metadata
 title: "My Awesome Blog"
 description: "Thoughts on code and life"
+
+# Appearance
 theme: "catppuccin-mocha"
 font: "inter"
+
+# Features
+show_toc: true
+show_repo_link: true
+
+# Analytics (optional)
 ga_id: "G-XXXXXXXXXX"
 \`\`\`
+
+### Config Options Explained
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| \`title\` | Your blog's name. Shows in header and browser tab | "Blog" |
+| \`description\` | Short tagline. Shows below title | "" |
+| \`theme\` | Color scheme (21 available) | "rose-pine" |
+| \`font\` | Typography choice | "geist-mono" |
+| \`show_toc\` | Show table of contents on posts | true |
+| \`show_repo_link\` | Show "View on GitHub" link | true |
+| \`ga_id\` | Google Analytics Measurement ID | null |
 
 ### Available Themes (21 total)
 github-light, github-dark, one-dark, gruvbox-dark, gruvbox-light, solarized-dark, solarized-light, nord, dracula, tokyo-night, monokai, rose-pine, rose-pine-moon, rose-pine-dawn, vesper, everforest, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha, ayu-dark
 
 ### Available Fonts (8 total)
 system, inter, manrope, space-grotesk, outfit, jetbrains, fira-code, geist-mono
+
+## Step 6: Google Analytics (optional)
+
+Track your visitors with Google Analytics.
+
+### How to get your GA ID:
+1. Go to https://analytics.google.com
+2. Create an account or sign in
+3. Create a new property for your blog
+4. Go to **Admin → Data Streams → Web**
+5. Copy your **Measurement ID** (starts with \`G-\`)
+
+Add to your config:
+\`\`\`yaml
+ga_id: "G-XXXXXXXXXX"
+\`\`\`
+
+Your analytics data stays in YOUR Google Analytics account. plok.sh doesn't see your visitor data.
+
+## FAQs
+
+**Can I use this for documentation?**
+Absolutely! Just create a \`/blog\` folder in your project repo and add your docs as markdown files. Great for changelogs, tutorials, or project guides.
+
+**Do I need to sign up?**
+Nope! plok.sh reads directly from public GitHub repos. No account, no API keys, no setup.
+
+**Can I use a private repo?**
+Not yet. plok.sh only works with public repositories. Private repo support may come in the future.
+
+**Can I use a custom domain?**
+Not currently. Your blog lives at \`plok.sh/username/repo\`. Custom domains are on the roadmap.
+
+**How do I delete my blog?**
+Just delete the \`/blog\` folder from your repo, or make the repo private. There's nothing to "delete" on plok.sh — we don't store your content.
+
+**Is there a post limit?**
+No limits. Add as many markdown files as you want. Just keep them in the \`/blog\` folder.
+
+**Can I organize posts in subfolders?**
+Not yet. All posts should be directly in the \`/blog\` folder. Subfolder support is planned.
+
+**Does it support images?**
+Yes! Use standard markdown image syntax. Host images in your repo or use external URLs like \`![alt](https://...)\`
 
 ## Tips
 

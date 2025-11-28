@@ -3,15 +3,15 @@
 ## 🚀 High Priority
 
 ### Guide Page
-- [ ] Create `/guide` page with step-by-step setup
-- [ ] Explain Git basics, GitHub repo creation
-- [ ] Document frontmatter format with examples
-- [ ] Add link to guide in top nav menu
+- [X] Create `/guide` page with step-by-step setup
+- [X] Explain Git basics, GitHub repo creation
+- [X] Document frontmatter format with examples
+- [X] Add link to guide in top nav menu
 
 ### Homepage
-- [ ] Add "GA Support" to features section
-- [ ] Reduce subtitle font size on mobile
-- [ ] Replace "GitHub" text with icon in header
+- [X] Add "GA Support" to features section
+- [X] Reduce hero title and subtitle font size on mobile
+- [X] Replace "GitHub" text with icon in header
 
 ---
 
