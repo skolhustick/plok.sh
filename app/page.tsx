@@ -206,10 +206,10 @@ export default function Home() {
               <div>
                 <Link href="/themes" className="hover:text-[var(--accent)] transition-colors">21 themes</Link>
                 {' • '}
-                <span>Syntax highlighting</span>
+                <span>Headers & footers</span>
               </div>
               <div>
-                <span>GA support</span>
+                <span>Links page</span>
                 {' • '}
                 <span>Zero config</span>
               </div>
@@ -217,9 +217,9 @@ export default function Home() {
             <div className="hidden sm:block">
               <Link href="/themes" className="hover:text-[var(--accent)] transition-colors">21 themes</Link>
               {' • '}
-              <span>Syntax highlighting</span>
+              <span>Headers & footers</span>
               {' • '}
-              <span>GA support</span>
+              <span>Links page</span>
               {' • '}
               <span>Zero config</span>
             </div>

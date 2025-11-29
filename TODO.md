@@ -5,10 +5,11 @@
 [X] Header and Footer .md in /blog will attach it to the content page.
     [X] Must update the guide etc.
 
-[] Linktree alternative : Anything in /blog/links.yaml
-    [] Update CTA and guide etc.
+[X] Search feature for /username/repo
 
-[] Search feature for /username
+[X] Linktree alternative : Anything in /blog/links.yaml
+    [X] Update CTA and guide etc.
+
 
 
 

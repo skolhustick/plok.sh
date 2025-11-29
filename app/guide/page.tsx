@@ -7,12 +7,26 @@ export const metadata = {
   description: 'Learn how to set up your blog on plok.sh in minutes',
 };
 
+const tocItems = [
+  { id: 'prerequisites', label: '0. What you need', emoji: '✓' },
+  { id: 'create-folder', label: '1. Create blog folder', emoji: '📁' },
+  { id: 'first-post', label: '2. Add first post', emoji: '📝' },
+  { id: 'frontmatter', label: '3. Frontmatter', emoji: '📋' },
+  { id: 'visit-blog', label: '4. Visit your blog', emoji: '🌐' },
+  { id: 'customize', label: '5. Customize', emoji: '🎨' },
+  { id: 'analytics', label: '6. Google Analytics', emoji: '📊' },
+  { id: 'header-footer', label: '7. Header & Footer', emoji: '📄' },
+  { id: 'links-page', label: '8. Links Page', emoji: '🔗' },
+  { id: 'tips', label: 'Tips', emoji: '💡' },
+  { id: 'faqs', label: 'FAQs', emoji: '❓' },
+];
+
 export default function GuidePage() {
   return (
     <Shell breadcrumbs={[{ label: 'guide' }]} theme="rose-pine" font="geist-mono">
       <div className="max-w-3xl mx-auto px-4 py-12">
         {/* Hero */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[var(--fg)] mb-4">
             Get started in 5 minutes ⚡
           </h1>
@@ -22,8 +36,25 @@ export default function GuidePage() {
           <CopyGuideButton />
         </div>
 
+        {/* Table of Contents */}
+        <nav className="mb-16 p-4 bg-[var(--code-bg)] rounded-lg border border-[var(--border)]">
+          <p className="text-sm font-medium text-[var(--muted)] mb-3">On this page</p>
+          <div className="flex flex-wrap gap-2">
+            {tocItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="text-xs px-2.5 py-1.5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--muted)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors"
+              >
+                <span className="mr-1">{item.emoji}</span>
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
         {/* Prerequisites */}
-        <section className="mb-16">
+        <section id="prerequisites" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">0.</span> What you need
           </h2>
@@ -46,7 +77,7 @@ export default function GuidePage() {
         </section>
 
         {/* Step 1 */}
-        <section className="mb-16">
+        <section id="create-folder" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">1.</span> Create a blog folder
           </h2>
@@ -81,7 +112,7 @@ export default function GuidePage() {
         </section>
 
         {/* Step 2 */}
-        <section className="mb-16">
+        <section id="first-post" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">2.</span> Add your first post
           </h2>
@@ -127,7 +158,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* Step 3 - Frontmatter */}
-        <section className="mb-16">
+        <section id="frontmatter" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">3.</span> Understanding frontmatter
           </h2>
@@ -166,7 +197,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* Step 4 */}
-        <section className="mb-16">
+        <section id="visit-blog" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">4.</span> Visit your blog
           </h2>
@@ -185,7 +216,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* Optional: Customize */}
-        <section className="mb-16">
+        <section id="customize" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">5.</span> Customize (optional)
           </h2>
@@ -259,7 +290,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* Google Analytics */}
-        <section className="mb-16">
+        <section id="analytics" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">6.</span> Google Analytics (optional)
           </h2>
@@ -310,7 +341,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* Header & Footer */}
-        <section className="mb-16">
+        <section id="header-footer" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">7.</span> Header &amp; Footer (optional)
           </h2>
@@ -346,7 +377,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* Links Page */}
-        <section className="mb-16">
+        <section id="links-page" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
             <span className="text-[var(--accent)]">8.</span> Links Page (optional)
           </h2>
@@ -375,7 +406,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* Tips */}
-        <section className="mb-16">
+        <section id="tips" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4">
             💡 Tips
           </h2>
@@ -402,7 +433,7 @@ console.log("Hello from plok.sh!");
         </section>
 
         {/* FAQs */}
-        <section className="mb-16">
+        <section id="faqs" className="mb-16 scroll-mt-8">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-6">
             ❓ FAQs
           </h2>
