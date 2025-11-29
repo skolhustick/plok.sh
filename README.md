@@ -2,6 +2,8 @@
 
 ![plok.sh banner](https://plok.sh/banner-1200x630.jpg)
 
+[![Buy Me a Coffee](https://plok.sh/kofi.png)](https://ko-fi.com/I2I71PCK1O)
+
 **GitHub to blog, instantly.** Turn any GitHub repo's `/blog` folder into a beautiful, themed blog—no signup, no config, no deploy.
 
 🌐 **Live:** [plok.sh](https://plok.sh)
