@@ -3,7 +3,9 @@ import { PostList } from '@/components/PostList';
 import { ConfigBadge } from '@/components/ConfigBadge';
 import { getBlogPosts, getBlogPartial } from '@/lib/github';
 import { getRepoConfig, DEFAULT_CONFIG } from '@/lib/config';
+import { hasLinksFile } from '@/lib/links';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 interface Props {
   params: Promise<{ user: string; repo: string }>;
@@ -25,11 +27,12 @@ export async function generateMetadata({ params }: Props) {
 export default async function RepoPage({ params }: Props) {
   const { user, repo } = await params;
 
-  const [configResult, postsResult, headerContent, footerContent] = await Promise.all([
+  const [configResult, postsResult, headerContent, footerContent, hasLinks] = await Promise.all([
     getRepoConfig(user, repo),
     getBlogPosts(user, repo),
     getBlogPartial(user, repo, 'blog.header.md'),
     getBlogPartial(user, repo, 'blog.footer.md'),
+    hasLinksFile(user, repo),
   ]);
 
   const config = configResult.ok ? configResult.value.config : DEFAULT_CONFIG;
@@ -105,19 +108,38 @@ export default async function RepoPage({ params }: Props) {
               hasConfigFile={hasConfigFile} 
               hasHeader={hasHeader}
               hasFooter={hasFooter}
+              hasLinks={hasLinks}
               user={user} 
               repo={repo} 
             />
           </div>
           {config?.show_repo_link && (
-            <a
-              href={`https://github.com/${user}/${repo}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-[var(--link)] hover:text-[var(--link-hover)]"
+            <div className="flex items-center gap-4 mt-4">
+              <a
+                href={`https://github.com/${user}/${repo}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--link)] hover:text-[var(--link-hover)]"
+              >
+                View on GitHub →
+              </a>
+              {hasLinks && (
+                <Link
+                  href={`/${user}/${repo}/links`}
+                  className="text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
+                >
+                  🔗 Links
+                </Link>
+              )}
+            </div>
+          )}
+          {!config?.show_repo_link && hasLinks && (
+            <Link
+              href={`/${user}/${repo}/links`}
+              className="inline-block mt-4 text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
             >
-              View on GitHub →
-            </a>
+              🔗 Links
+            </Link>
           )}
         </header>
 

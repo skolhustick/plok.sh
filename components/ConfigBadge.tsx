@@ -8,11 +8,12 @@ interface ConfigBadgeProps {
   hasConfigFile: boolean;
   hasHeader: boolean;
   hasFooter: boolean;
+  hasLinks: boolean;
   user: string;
   repo: string;
 }
 
-export function ConfigBadge({ config, hasConfigFile, hasHeader, hasFooter, user, repo }: ConfigBadgeProps) {
+export function ConfigBadge({ config, hasConfigFile, hasHeader, hasFooter, hasLinks, user, repo }: ConfigBadgeProps) {
   const [showModal, setShowModal] = useState(false);
 
   if (!hasConfigFile) {
@@ -92,6 +93,9 @@ ${config.ga_id ? `ga_id: "${config.ga_id}"` : '# ga_id: "G-XXXXXXXXXX"'}`;
                 </div>
                 <div className={hasFooter ? 'text-green-500' : 'text-[var(--muted)]'}>
                   {hasFooter ? '✓' : '○'} blog.footer.md
+                </div>
+                <div className={hasLinks ? 'text-green-500' : 'text-[var(--muted)]'}>
+                  {hasLinks ? '✓' : '○'} links.yaml
                 </div>
               </div>
 

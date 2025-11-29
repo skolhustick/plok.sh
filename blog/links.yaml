@@ -1,0 +1,12 @@
+title: "plok.sh Links"
+description: "Find us around the web"
+
+links:
+  - label: "GitHub"
+    url: "https://github.com/skolhustick/plok.sh"
+  - label: "Live Demo"
+    url: "https://plok.sh"
+  - label: "Guide"
+    url: "https://plok.sh/guide"
+  - label: "Browse Themes"
+    url: "https://plok.sh/themes"

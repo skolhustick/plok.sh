@@ -105,6 +105,24 @@ Both files are standard markdown. Great for:
 - Newsletter signup prompts
 - "Subscribe to RSS" footers
 
+### Links Page (Linktree alternative)
+
+Create `blog/links.yaml` to get a links page at `/user/repo/links`:
+
+```yaml
+title: "My Links"
+description: "Find me around the web"
+links:
+  - label: "GitHub"
+    url: "https://github.com/you"
+  - label: "Twitter"
+    url: "https://twitter.com/you"
+  - label: "Website"
+    url: "https://example.com"
+```
+
+Icons are auto-detected for popular platforms (GitHub, Twitter, YouTube, etc).
+
 ---
 
 ## 📁 URL Structure
@@ -115,6 +133,7 @@ Both files are standard markdown. Great for:
 | `plok.sh/username/repo` | All posts in that repo's blog |
 | `plok.sh/username/repo/post-slug` | Individual post |
 | `plok.sh/username/repo/folder/post` | Nested posts supported |
+| `plok.sh/username/repo/links` | Links page (if `links.yaml` exists) |
 
 ---
 

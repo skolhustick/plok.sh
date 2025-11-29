@@ -151,6 +151,23 @@ blog/
 
 Both files are standard markdown. Great for author bios, social links, or newsletter signups.
 
+## Step 8: Links Page (optional)
+
+Create a Linktree-style links page with a simple YAML file:
+
+\`\`\`yaml
+# blog/links.yaml
+title: "My Links"
+description: "Find me around the web"
+links:
+  - label: "GitHub"
+    url: "https://github.com/you"
+  - label: "Twitter"
+    url: "https://twitter.com/you"
+\`\`\`
+
+Your links page will be at \`plok.sh/user/repo/links\`. Icons are auto-detected for popular platforms!
+
 ## FAQs
 
 **Can I use this for documentation?**

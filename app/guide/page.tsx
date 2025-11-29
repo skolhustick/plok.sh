@@ -345,6 +345,35 @@ console.log("Hello from plok.sh!");
           </p>
         </section>
 
+        {/* Links Page */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
+            <span className="text-[var(--accent)]">8.</span> Links Page (optional)
+          </h2>
+          <p className="text-[var(--muted)] mb-6">
+            Create a Linktree-style links page with a simple YAML file.
+          </p>
+
+          <div className="bg-[var(--code-bg)] rounded-lg border border-[var(--border)] overflow-hidden mb-6">
+            <div className="px-4 py-2 border-b border-[var(--border)] text-sm text-[var(--muted)]">
+              blog/links.yaml
+            </div>
+            <pre className="p-4 text-sm font-mono overflow-x-auto">
+              <span className="text-[var(--accent)]">title</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;My Links&quot;</span>{'\n'}
+              <span className="text-[var(--accent)]">description</span><span className="text-[var(--muted)]">:</span> <span className="text-[var(--fg)]">&quot;Find me around the web&quot;</span>{'\n'}
+              <span className="text-[var(--accent)]">links</span><span className="text-[var(--muted)]">:</span>{'\n'}
+              <span className="text-[var(--fg)]">  - label: &quot;GitHub&quot;</span>{'\n'}
+              <span className="text-[var(--fg)]">    url: &quot;https://github.com/you&quot;</span>{'\n'}
+              <span className="text-[var(--fg)]">  - label: &quot;Twitter&quot;</span>{'\n'}
+              <span className="text-[var(--fg)]">    url: &quot;https://twitter.com/you&quot;</span>
+            </pre>
+          </div>
+
+          <p className="text-sm text-[var(--muted)]">
+            💡 Your links page will be at <code className="px-1 bg-[var(--bg)] rounded">plok.sh/user/repo/links</code>. Icons are auto-detected for popular platforms!
+          </p>
+        </section>
+
         {/* Tips */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4">
