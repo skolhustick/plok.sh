@@ -1,7 +1,7 @@
 import { Shell } from '@/components/Shell';
 import { PostList } from '@/components/PostList';
 import { ConfigBadge } from '@/components/ConfigBadge';
-import { getBlogPosts } from '@/lib/github';
+import { getBlogPosts, getBlogPartial } from '@/lib/github';
 import { getRepoConfig, DEFAULT_CONFIG } from '@/lib/config';
 import { notFound } from 'next/navigation';
 
@@ -25,13 +25,17 @@ export async function generateMetadata({ params }: Props) {
 export default async function RepoPage({ params }: Props) {
   const { user, repo } = await params;
 
-  const [configResult, postsResult] = await Promise.all([
+  const [configResult, postsResult, headerContent, footerContent] = await Promise.all([
     getRepoConfig(user, repo),
     getBlogPosts(user, repo),
+    getBlogPartial(user, repo, 'blog.header.md'),
+    getBlogPartial(user, repo, 'blog.footer.md'),
   ]);
 
   const config = configResult.ok ? configResult.value.config : DEFAULT_CONFIG;
   const hasConfigFile = configResult.ok ? configResult.value.hasConfigFile : false;
+  const hasHeader = !!headerContent;
+  const hasFooter = !!footerContent;
 
   if (!postsResult.ok) {
     if (postsResult.error.code === 'NOT_FOUND') {
@@ -96,7 +100,14 @@ export default async function RepoPage({ params }: Props) {
                 <p className="mt-2 text-[var(--muted)]">{config.description}</p>
               )}
             </div>
-            <ConfigBadge config={config} hasConfigFile={hasConfigFile} user={user} repo={repo} />
+            <ConfigBadge 
+              config={config} 
+              hasConfigFile={hasConfigFile} 
+              hasHeader={hasHeader}
+              hasFooter={hasFooter}
+              user={user} 
+              repo={repo} 
+            />
           </div>
           {config?.show_repo_link && (
             <a

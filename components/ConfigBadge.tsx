@@ -6,11 +6,13 @@ import type { BlogConfig } from '@/types/blog';
 interface ConfigBadgeProps {
   config: BlogConfig;
   hasConfigFile: boolean;
+  hasHeader: boolean;
+  hasFooter: boolean;
   user: string;
   repo: string;
 }
 
-export function ConfigBadge({ config, hasConfigFile, user, repo }: ConfigBadgeProps) {
+export function ConfigBadge({ config, hasConfigFile, hasHeader, hasFooter, user, repo }: ConfigBadgeProps) {
   const [showModal, setShowModal] = useState(false);
 
   if (!hasConfigFile) {
@@ -36,6 +38,11 @@ ${config.accent ? `accent: "${config.accent}"` : '# accent: "#c4a7e7"'}
 show_toc: ${config.show_toc}
 show_repo_link: ${config.show_repo_link}
 ${config.ga_id ? `ga_id: "${config.ga_id}"` : '# ga_id: "G-XXXXXXXXXX"'}`;
+
+  const partialsStatus = [
+    hasHeader ? '✓ blog.header.md' : '○ blog.header.md',
+    hasFooter ? '✓ blog.footer.md' : '○ blog.footer.md',
+  ].join('\n');
 
   return (
     <>
@@ -78,6 +85,19 @@ ${config.ga_id ? `ga_id: "${config.ga_id}"` : '# ga_id: "G-XXXXXXXXXX"'}`;
               <pre className="bg-[var(--code-bg)] p-4 rounded text-sm overflow-x-auto font-mono text-[var(--fg)]">
                 {configYaml}
               </pre>
+              
+              {/* Header/Footer Status */}
+              <p className="text-xs text-[var(--muted)] mt-4 mb-3">
+                Templates
+              </p>
+              <div className="bg-[var(--code-bg)] p-4 rounded text-sm font-mono space-y-1">
+                <div className={hasHeader ? 'text-green-500' : 'text-[var(--muted)]'}>
+                  {hasHeader ? '✓' : '○'} blog.header.md
+                </div>
+                <div className={hasFooter ? 'text-green-500' : 'text-[var(--muted)]'}>
+                  {hasFooter ? '✓' : '○'} blog.footer.md
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center justify-between p-4 border-t border-[var(--border)] bg-[var(--code-bg)]">
