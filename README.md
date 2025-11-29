@@ -87,6 +87,24 @@ ga_id: G-XXXXXXXXXX  # Optional Google Analytics
 
 `system`, `inter`, `manrope`, `space-grotesk`, `outfit`, `jetbrains`, `fira-code`, `geist-mono`
 
+### Header & Footer Templates
+
+Add consistent content above/below every post by creating these optional files:
+
+```
+blog/
+├── blog.header.md  ← Shows above every post
+├── blog.footer.md  ← Shows below every post
+├── hello-world.md
+└── another-post.md
+```
+
+Both files are standard markdown. Great for:
+- Blog-wide navigation or branding
+- Author bio / social links
+- Newsletter signup prompts
+- "Subscribe to RSS" footers
+
 ---
 
 ## 📁 URL Structure

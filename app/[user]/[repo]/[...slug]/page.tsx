@@ -1,8 +1,8 @@
 import { Shell } from '@/components/Shell';
 import { PostView } from '@/components/PostView';
-import { getPostContent } from '@/lib/github';
+import { getPostContent, getBlogPartial } from '@/lib/github';
 import { getRepoConfig } from '@/lib/config';
-import { renderMarkdown } from '@/lib/markdown';
+import { renderMarkdown, renderPartialMarkdown } from '@/lib/markdown';
 import { DEFAULT_CONFIG } from '@/lib/config';
 import { resolveTheme } from '@/lib/themes';
 import { notFound } from 'next/navigation';
@@ -42,12 +42,16 @@ export default async function PostPage({ params }: Props) {
   const { user, repo, slug } = await params;
   const slugPath = slug.join('/');
 
-  const [configResult, contentResult] = await Promise.all([
+  // Fetch config, content, and partials in parallel
+  const [configResult, contentResult, headerContent, footerContent] = await Promise.all([
     getRepoConfig(user, repo),
     getPostContent(user, repo, slugPath),
+    getBlogPartial(user, repo, 'blog.header.md'),
+    getBlogPartial(user, repo, 'blog.footer.md'),
   ]);
 
   const config = configResult.ok ? configResult.value.config : DEFAULT_CONFIG;
+  const theme = resolveTheme(config.theme);
 
   if (!contentResult.ok) {
     if (contentResult.error.code === 'NOT_FOUND') {
@@ -79,7 +83,7 @@ export default async function PostPage({ params }: Props) {
   try {
     rendered = await renderMarkdown(
       contentResult.value,
-      resolveTheme(config.theme),
+      theme,
       slugPath
     );
   } catch (error) {
@@ -114,6 +118,12 @@ export default async function PostPage({ params }: Props) {
     );
   }
 
+  // Render header/footer partials (non-blocking - failures return null)
+  const [headerHtml, footerHtml] = await Promise.all([
+    headerContent ? renderPartialMarkdown(headerContent, theme) : null,
+    footerContent ? renderPartialMarkdown(footerContent, theme) : null,
+  ]);
+
   return (
     <Shell
       breadcrumbs={[
@@ -136,6 +146,8 @@ export default async function PostPage({ params }: Props) {
           user={user}
           repo={repo}
           slug={slugPath}
+          headerHtml={headerHtml ?? undefined}
+          footerHtml={footerHtml ?? undefined}
         />
       </div>
     </Shell>

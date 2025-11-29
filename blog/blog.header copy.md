@@ -1,0 +1,1 @@
+### This is a simple footer from blog.header.md. Optional.

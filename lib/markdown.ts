@@ -144,3 +144,56 @@ export async function renderMarkdown(
 
   return { title, html, toc, date, description, hasFrontmatter };
 }
+
+/**
+ * Render partial markdown (header/footer) to HTML.
+ * Lightweight version - no TOC extraction, no frontmatter parsing.
+ * Returns null if content is empty or parsing fails.
+ */
+export async function renderPartialMarkdown(
+  text: string,
+  themeName: ThemeName
+): Promise<string | null> {
+  // Empty or whitespace-only content
+  if (!text.trim()) {
+    return null;
+  }
+
+  try {
+    const shikiTheme = mapThemeToShikiTheme(themeName);
+    const highlighter = await getHighlighter(shikiTheme);
+
+    const md = new MarkdownIt({
+      html: false, // Security: disable raw HTML
+      linkify: true,
+      typographer: true,
+    });
+
+    // Custom fence renderer for Shiki syntax highlighting (same as main render)
+    md.renderer.rules.fence = (tokens, idx) => {
+      const token = tokens[idx];
+      const lang = token.info.trim() || 'text';
+      const code = token.content;
+
+      try {
+        const html = highlighter.codeToHtml(code, {
+          lang: highlighter.getLoadedLanguages().includes(lang) ? lang : 'text',
+          theme: shikiTheme,
+        });
+        return html;
+      } catch {
+        const escaped = code
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+        return `<pre><code class="language-${lang}">${escaped}</code></pre>`;
+      }
+    };
+
+    return md.render(text);
+  } catch (error) {
+    // Log for debugging but don't block post rendering
+    console.error('Failed to render partial markdown:', error);
+    return null;
+  }
+}

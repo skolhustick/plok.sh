@@ -309,6 +309,42 @@ console.log("Hello from plok.sh!");
           </div>
         </section>
 
+        {/* Header & Footer */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-[var(--fg)] mb-4 flex items-center gap-2">
+            <span className="text-[var(--accent)]">7.</span> Header &amp; Footer (optional)
+          </h2>
+          <p className="text-[var(--muted)] mb-6">
+            Add consistent content above/below every post with these optional files.
+          </p>
+
+          <div className="bg-[var(--code-bg)] rounded-lg p-6 border border-[var(--border)] mb-6">
+            <p className="text-sm text-[var(--muted)] mb-3">Your repo structure:</p>
+            <div className="text-sm text-[var(--fg)] font-mono space-y-1">
+              <div>📁 blog</div>
+              <div className="pl-6">📄 <span className="text-[var(--accent)]">blog.header.md</span> <span className="text-[var(--muted)]">← shows above every post</span></div>
+              <div className="pl-6">📄 <span className="text-[var(--accent)]">blog.footer.md</span> <span className="text-[var(--muted)]">← shows below every post</span></div>
+              <div className="pl-6 text-[var(--muted)]">📄 your-posts.md</div>
+            </div>
+          </div>
+
+          <div className="bg-[var(--code-bg)] rounded-lg border border-[var(--border)] overflow-hidden mb-6">
+            <div className="px-4 py-2 border-b border-[var(--border)] text-sm text-[var(--muted)]">
+              Example: blog/blog.footer.md
+            </div>
+            <pre className="p-4 text-sm font-mono overflow-x-auto">
+              <span className="text-[var(--muted)]">---</span>{'\n'}
+              <span className="text-[var(--fg)]">Thanks for reading! Follow me on </span>
+              <span className="text-[var(--accent)]">[Twitter](https://twitter.com/you)</span>
+              <span className="text-[var(--fg)]"> for more.</span>
+            </pre>
+          </div>
+
+          <p className="text-sm text-[var(--muted)]">
+            💡 Both files are optional and use standard markdown. Great for author bios, social links, or newsletter signups.
+          </p>
+        </section>
+
         {/* Tips */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-[var(--fg)] mb-4">
@@ -381,7 +417,7 @@ console.log("Hello from plok.sh!");
             <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">
               <p className="text-[var(--fg)] font-medium mb-2">Can I organize posts in subfolders?</p>
               <p className="text-sm text-[var(--muted)]">
-                Not yet. All posts should be directly in the <code className="px-1 bg-[var(--bg)] rounded">/blog</code> folder. Subfolder support is planned.
+                Yes! Create subfolders inside <code className="px-1 bg-[var(--bg)] rounded">/blog</code> and posts will be accessible at <code className="px-1 bg-[var(--bg)] rounded">plok.sh/user/repo/folder/post</code>
               </p>
             </div>
             <div className="bg-[var(--code-bg)] rounded-lg p-4 border border-[var(--border)]">

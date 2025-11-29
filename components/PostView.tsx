@@ -16,6 +16,8 @@ interface PostViewProps {
   user: string;
   repo: string;
   slug: string;
+  headerHtml?: string;
+  footerHtml?: string;
 }
 
 function formatDate(dateStr: string): string {
@@ -32,7 +34,7 @@ function formatDate(dateStr: string): string {
   }
 }
 
-export function PostView({ html, toc, config, title, date, description, hasFrontmatter, user, repo, slug }: PostViewProps) {
+export function PostView({ html, toc, config, title, date, description, hasFrontmatter, user, repo, slug, headerHtml, footerHtml }: PostViewProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopyLink = async () => {
@@ -97,6 +99,24 @@ export function PostView({ html, toc, config, title, date, description, hasFront
           </header>
         )}
 
+        {/* User header partial */}
+        {headerHtml && (
+          <section
+            className="prose prose-invert max-w-none mb-8
+              prose-headings:text-[var(--fg)]
+              prose-p:text-[var(--fg)]
+              prose-a:text-[var(--link)] hover:prose-a:text-[var(--link-hover)]
+              prose-strong:text-[var(--fg)]
+              prose-code:text-[var(--code-fg)] prose-code:bg-[var(--code-bg)]
+              prose-pre:bg-[var(--code-bg)]
+              prose-blockquote:border-[var(--accent)] prose-blockquote:text-[var(--muted)]
+              prose-li:text-[var(--fg)]
+              prose-th:text-[var(--fg)]
+              prose-td:text-[var(--fg)]"
+            dangerouslySetInnerHTML={{ __html: headerHtml }}
+          />
+        )}
+
         <div
           className="prose prose-invert max-w-none
             prose-headings:text-[var(--fg)]
@@ -111,6 +131,24 @@ export function PostView({ html, toc, config, title, date, description, hasFront
             prose-td:text-[var(--fg)]"
           dangerouslySetInnerHTML={{ __html: html }}
         />
+
+        {/* User footer partial */}
+        {footerHtml && (
+          <section
+            className="prose prose-invert max-w-none mt-8
+              prose-headings:text-[var(--fg)]
+              prose-p:text-[var(--fg)]
+              prose-a:text-[var(--link)] hover:prose-a:text-[var(--link-hover)]
+              prose-strong:text-[var(--fg)]
+              prose-code:text-[var(--code-fg)] prose-code:bg-[var(--code-bg)]
+              prose-pre:bg-[var(--code-bg)]
+              prose-blockquote:border-[var(--accent)] prose-blockquote:text-[var(--muted)]
+              prose-li:text-[var(--fg)]
+              prose-th:text-[var(--fg)]
+              prose-td:text-[var(--fg)]"
+            dangerouslySetInnerHTML={{ __html: footerHtml }}
+          />
+        )}
 
         {/* Footer navigation */}
         <footer className="mt-16 pt-8 border-t border-[var(--border)] space-y-6">

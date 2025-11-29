@@ -137,6 +137,20 @@ ga_id: "G-XXXXXXXXXX"
 
 Your analytics data stays in YOUR Google Analytics account. plok.sh doesn't see your visitor data.
 
+## Step 7: Header & Footer (optional)
+
+Add consistent content above/below every post with these optional files:
+
+\`\`\`
+blog/
+├── blog.header.md  ← shows above every post
+├── blog.footer.md  ← shows below every post
+├── hello-world.md
+└── ...
+\`\`\`
+
+Both files are standard markdown. Great for author bios, social links, or newsletter signups.
+
 ## FAQs
 
 **Can I use this for documentation?**
@@ -158,7 +172,7 @@ Just delete the \`/blog\` folder from your repo, or make the repo private. There
 No limits. Add as many markdown files as you want. Just keep them in the \`/blog\` folder.
 
 **Can I organize posts in subfolders?**
-Not yet. All posts should be directly in the \`/blog\` folder. Subfolder support is planned.
+Yes! Create subfolders inside \`/blog\` and posts will be accessible at \`plok.sh/user/repo/folder/post\`
 
 **Does it support images?**
 Yes! Use standard markdown image syntax. Host images in your repo or use external URLs like \`![alt](https://...)\`

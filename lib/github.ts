@@ -142,8 +142,10 @@ export async function getBlogPosts(
     }
     
     for (const file of result.value) {
-      // Skip config file
+      // Skip config file and partials (header/footer)
       if (file.name === 'blog.config.yaml') continue;
+      if (file.name === 'blog.header.md') continue;
+      if (file.name === 'blog.footer.md') continue;
       
       if (file.type === 'dir') {
         // Recursively scan subdirectory
@@ -326,4 +328,51 @@ export async function getUserBlogRepos(
  */
 export function hasGitHubToken(): boolean {
   return !!GITHUB_TOKEN;
+}
+
+/**
+ * Fetch a blog partial (header or footer) markdown file.
+ * Returns null on 404 or any error - never throws, never blocks post rendering.
+ */
+export async function getBlogPartial(
+  user: string,
+  repo: string,
+  filename: 'blog.header.md' | 'blog.footer.md'
+): Promise<string | null> {
+  const url = `https://api.github.com/repos/${user}/${repo}/contents/blog/${filename}`;
+  
+  const result = await githubFetch<{ download_url: string }>(url, { revalidate: 300 });
+  
+  if (!result.ok) {
+    // 404 or any error - silently return null
+    return null;
+  }
+  
+  const downloadUrl = result.value.download_url;
+  if (!downloadUrl) {
+    return null;
+  }
+  
+  try {
+    const response = await fetch(downloadUrl, {
+      next: { revalidate: 300 },
+    });
+    
+    if (!response.ok) {
+      return null;
+    }
+    
+    const content = await response.text();
+    
+    // Empty or whitespace-only files are treated as absent
+    if (!content.trim()) {
+      return null;
+    }
+    
+    return content;
+  } catch (error) {
+    // Log for debugging but don't block post rendering
+    console.error(`Failed to fetch ${filename} for ${user}/${repo}:`, error);
+    return null;
+  }
 }
