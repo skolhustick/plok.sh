@@ -79,18 +79,14 @@ ${config.ga_id ? `ga_id: "${config.ga_id}"` : '# ga_id: "G-XXXXXXXXXX"'}`;
             </div>
             
             <div className="p-4 overflow-auto max-h-[60vh]">
+              {/* Files Status */}
               <p className="text-xs text-[var(--muted)] mb-3">
-                <code className="bg-[var(--code-bg)] px-1.5 py-0.5 rounded">blog/blog.config.yaml</code>
+                Files detected
               </p>
-              <pre className="bg-[var(--code-bg)] p-4 rounded text-sm overflow-x-auto font-mono text-[var(--fg)]">
-                {configYaml}
-              </pre>
-              
-              {/* Header/Footer Status */}
-              <p className="text-xs text-[var(--muted)] mt-4 mb-3">
-                Templates
-              </p>
-              <div className="bg-[var(--code-bg)] p-4 rounded text-sm font-mono space-y-1">
+              <div className="bg-[var(--code-bg)] p-4 rounded text-sm font-mono space-y-1 mb-4">
+                <div className={hasConfigFile ? 'text-green-500' : 'text-[var(--muted)]'}>
+                  {hasConfigFile ? '✓' : '○'} blog.config.yaml
+                </div>
                 <div className={hasHeader ? 'text-green-500' : 'text-[var(--muted)]'}>
                   {hasHeader ? '✓' : '○'} blog.header.md
                 </div>
@@ -98,6 +94,13 @@ ${config.ga_id ? `ga_id: "${config.ga_id}"` : '# ga_id: "G-XXXXXXXXXX"'}`;
                   {hasFooter ? '✓' : '○'} blog.footer.md
                 </div>
               </div>
+
+              <p className="text-xs text-[var(--muted)] mb-3">
+                Current config
+              </p>
+              <pre className="bg-[var(--code-bg)] p-4 rounded text-sm overflow-x-auto font-mono text-[var(--fg)]">
+                {configYaml}
+              </pre>
             </div>
 
             <div className="flex items-center justify-between p-4 border-t border-[var(--border)] bg-[var(--code-bg)]">
