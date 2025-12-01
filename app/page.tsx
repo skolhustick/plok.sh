@@ -147,6 +147,13 @@ export default function Home() {
       {/* Hero */}
       <main className="flex-1 flex items-center justify-center px-6">
         <div className="max-w-3xl w-full text-center">
+          
+
+          <div className='flex justify-center mb-4 opacity-50'>
+            <a href="https://www.producthunt.com/products/plok-sh?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_source=badge-plok&#0045;sh" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=1043830&theme=dark&period=daily&t=1764581574439" alt="plok&#0046;sh - Github&#0032;to&#0032;blog&#0046;&#0032;Instantly&#0046;&#0032;Free&#0032;forever&#0046; | Product Hunt" style={{ width: '250px', height: '38px' }} width="250" height="38" /></a>
+          </div>
+
+
           {/* Animated Flow Icon */}
           <FlowAnimation />
           
